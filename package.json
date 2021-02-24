@@ -1,7 +1,7 @@
 {
   "name": "meme-it",
   "version": "1.0.0",
-  "description": "",
+  "description": "meme posting and creating app",
   "main": "server.js",
   "scripts": {
     "test": "jest",
@@ -12,7 +12,7 @@
     "url": "git+https://github.com/paulchang15/meme-it.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Bret Short & Paul Chang",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/paulchang15/meme-it/issues"
