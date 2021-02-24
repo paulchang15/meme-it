@@ -1,4 +1,4 @@
-const { Model, DataTypes } = require("sequelize");
+const { Model, DataTypes, Sequelize } = require("sequelize");
 const sequelize = require("../config/connection");
 
 class Post extends Model {}
@@ -24,6 +24,9 @@ Post.init(
         model: "user",
         key: "id",
       },
+    },
+    post_url: {
+      type: Sequelize.BLOB("long"),
     },
   },
   {
