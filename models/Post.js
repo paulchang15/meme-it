@@ -25,9 +25,6 @@ Post.init(
         key: "id",
       },
     },
-    post_url: {
-      type: Sequelize.BLOB("long"),
-    },
   },
   {
     sequelize,
