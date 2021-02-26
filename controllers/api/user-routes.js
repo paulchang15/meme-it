@@ -1,5 +1,6 @@
 const router = require("express").Router();
-const { User, Post, Vote } = require("../../models");
+const { User, Post, Vote, Comment } = require("../../models");
+const sequelize = require("../../config/connection");
 
 router.get("/", async (req, res) => {
   try {
@@ -71,7 +72,8 @@ router.post("/", async (req, res) => {
           (req.session.loggedIn = true);
       });
     });
-    res.json(userPost).then(res.json(userSave));
+    res.json(userPost);
+    res.json(userSave);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
