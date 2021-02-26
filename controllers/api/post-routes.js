@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { Post, User, Comment, Vote } = require("../../models");
-const withAuth = require("../../utils/auth");
+// const withAuth = require("../../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
@@ -17,6 +17,12 @@ router.get("/", async (req, res) => {
             "post_id",
             "user_id",
             "created_at",
+            [
+              sequelize.literal(
+                "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+              ),
+              "vote_count",
+            ],
           ],
           include: {
             model: User,
@@ -38,6 +44,8 @@ router.get("/", async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
+  // console.log("literall anything");
+  // res.send("yeet");
 });
 
 router.get("/:id", async (req, res) => {
@@ -62,32 +70,28 @@ router.get("/:id", async (req, res) => {
             attributes: ["username"],
           },
         },
-        {
-          model: User,
-          attributes: ["username"],
-        },
       ],
     });
     if (!postId) {
       res.status(404).json({ message: "No post found with this id" });
       return;
     }
+    res.json(postId);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
+  // console.log("literall anything");
+  // res.send("yeet");
 });
 
-router.post("/", withAuth, async (req, res) => {
+router.post("/", async (req, res) => {
   try {
     const postCreate = await Post.create({
       title: req.body.title,
       post_url: req.body.post_url,
       user_id: req.session.user_id,
     });
-    if (postCreate) {
-      res.json({ message: "User created!" });
-    }
     res.json(postCreate);
   } catch (err) {
     console.log(err);
@@ -95,23 +99,23 @@ router.post("/", withAuth, async (req, res) => {
   }
 });
 
-// router.put("/upvote", withAuth, async (req, res) => {
-//   try {
-//     const upVote = await Post.upvote(
-//       {
-//         ...req.body,
-//         user_id: req.session.user_id,
-//       },
-//       { Vote, Comment, User }
-//     );
-//     res.json(upVote);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
+router.put("/upvote", async (req, res) => {
+  try {
+    const upVote = await Post.upvote(
+      {
+        ...req.body,
+        user_id: req.session.user_id,
+      },
+      { Vote, Comment, User }
+    );
+    res.json(upVote);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
-router.put("/:id", withAuth, async (req, res) => {
+router.put("/:id", async (req, res) => {
   try {
     const upDate = await Post.update(
       {
@@ -134,7 +138,7 @@ router.put("/:id", withAuth, async (req, res) => {
   }
 });
 
-router.delete("/:id", withAuth, async (req, res) => {
+router.delete("/:id", async (req, res) => {
   try {
     const deletePost = await Post.destroy({
       where: {
