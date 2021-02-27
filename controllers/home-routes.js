@@ -43,12 +43,10 @@ router.get("/", async (req, res) => {
 
     const posts = await findPosts.map((post) => post.get({ plain: true }));
     console.log(findPosts[0]);
-    const render = res.render("homepage", {
+    await res.render("homepage", {
       posts,
       //   loggedIn: req.session.loggedIn,
     });
-
-    res.json(findPosts, posts, render);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -116,7 +114,6 @@ router.get("/post/:id", async (req, res) => {
       return;
     }
     const post = dbPostData.get({ plain: true });
-    res.json(findPost);
 
     res.render("single-post", {
       post,
