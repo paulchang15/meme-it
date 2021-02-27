@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { Post, User, Comment, Vote } = require("../../models");
-// const withAuth = require("../../utils/auth");
+const withAuth = require("../../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
@@ -44,8 +44,6 @@ router.get("/", async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
-  // console.log("literall anything");
-  // res.send("yeet");
 });
 
 router.get("/:id", async (req, res) => {
@@ -90,7 +88,7 @@ router.post("/", async (req, res) => {
     const postCreate = await Post.create({
       title: req.body.title,
       post_url: req.body.post_url,
-      user_id: req.session.user_id,
+      user_id: req.body.user_id, // add back req.session.user_id when login works
     });
     res.json(postCreate);
   } catch (err) {

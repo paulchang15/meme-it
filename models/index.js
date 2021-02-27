@@ -27,6 +27,7 @@ Post.hasMany(Comment, {
   foreignKey: "post_id",
 });
 
+// Vote Associations
 User.belongsToMany(Post, {
   through: Vote,
   as: "voted_posts",
