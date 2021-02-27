@@ -1,0 +1,11 @@
+<nav>
+    <div class="nav-wrapper">
+        <a href="/" class="brand-logo">iMemeit</a>
+        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        {{#each posts as |post|}}
+        <li>
+            {{> post-info post }}
+        </li>
+        {{/each}}
+    </div>
+</nav>
