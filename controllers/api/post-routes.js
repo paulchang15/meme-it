@@ -80,8 +80,6 @@ router.get("/:id", async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
-  // console.log("literall anything");
-  // res.send("yeet");
 });
 
 router.post("/", async (req, res) => {
@@ -117,24 +115,53 @@ router.put("/upvote", async (req, res) => {
 router.post("/image", async (req, res) => {
   try {
     // need front end function that selects url/file upload feature
-    if (urlupload) {
-      urlUpload();
-      const image = await Image.create({
-        // front end url
-      });
-      res.json(image);
-    }
-    if (file) {
-      fileUpload();
-      const image = await Image.create({
-        // front end url
-      });
-      res.json(image);
-    }
+    // make a post to a user to test the route
+    // if (urlupload) {
+    //   urlUpload();
+    //   const image = await Image.create({
+    //     where: {
+    //       post_id: req.params.post_id,
+    //       user_id: req.params.user_id,
+    //     },
+    //   });
+    //   res.json(image);
+    // }
+    // if (file) {
+    let file = await fileUpload();
+    const postCreate = await Post.create({
+      title: "test",
+      content: "test",
+      user_id: 1, // add back req.session.user_id when login works
+    });
+    const image = await Image.create({
+      where: {
+        post_id: postCreate.post_id,
+        user_id: 1,
+        img_url: file,
+      },
+    });
+
+    res.json(image);
+    // }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
+});
+
+router.get("/image", async (req, res) => {
+  try {
+    const image = await Image.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!image) {
+      res.status(404).json({ message: "No image found with this id " });
+      return;
+    }
+    res.json(image);
+  } catch (err) {}
 });
 router.put("/:id", async (req, res) => {
   try {

@@ -32,6 +32,7 @@ async function fileUpload(image) {
     await imgur.uploadFile(image);
     await function (json) {
       console.log(json.data.link);
+      return jason.data.link;
     };
   } catch (err) {
     console.error(err.message);
