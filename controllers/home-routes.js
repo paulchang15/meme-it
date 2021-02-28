@@ -3,13 +3,12 @@ const sequelize = require("../config/connection");
 const { Post, User, Comment } = require("../models");
 
 router.get("/", async (req, res) => {
-  console.log("---------HOMIEEEEE ROUTESSSS-----------");
   try {
     console.log(req.session);
     const findPosts = await Post.findAll({
       attributes: [
         "id",
-        "post_url",
+        "content",
         "title",
         "created_at",
         [
@@ -45,17 +44,13 @@ router.get("/", async (req, res) => {
     console.log(findPosts[0]);
     await res.render("homepage", {
       posts,
-      //   loggedIn: req.session.loggedIn,
+      // loggedIn: req.session.loggedIn, // uncomment this back when session is active
     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
-
-// router.get("/", (req, res) => {
-//   res.render("homepage");
-// });
 
 router.get("/login", async (req, res) => {
   try {
@@ -78,7 +73,7 @@ router.get("/post/:id", async (req, res) => {
       },
       attributes: [
         "id",
-        "post_url",
+        "content",
         "title",
         "created_at",
         [

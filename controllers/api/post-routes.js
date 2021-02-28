@@ -1,12 +1,13 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
-const { Post, User, Comment, Vote } = require("../../models");
+const { Post, User, Comment, Vote, Image } = require("../../models");
 const withAuth = require("../../utils/auth");
+const { fileUpload, urlUpload } = require("../../utils/imgur");
 
 router.get("/", async (req, res) => {
   try {
     const post = await Post.findAll({
-      attributes: ["id", "post_url", "title", "created_at"],
+      attributes: ["id", "content", "title", "created_at"],
       order: [["created_at", "DESC"]],
       include: [
         {
@@ -52,7 +53,7 @@ router.get("/:id", async (req, res) => {
       where: {
         id: req.params.id,
       },
-      attributes: ["id", "post_url", "title", "created_at"],
+      attributes: ["id", "content", "title", "created_at"],
       include: [
         {
           model: Comment,
@@ -79,15 +80,13 @@ router.get("/:id", async (req, res) => {
     console.log(err);
     res.status(500).json(err);
   }
-  // console.log("literall anything");
-  // res.send("yeet");
 });
 
 router.post("/", async (req, res) => {
   try {
     const postCreate = await Post.create({
       title: req.body.title,
-      post_url: req.body.post_url,
+      content: req.body.content,
       user_id: req.body.user_id, // add back req.session.user_id when login works
     });
     res.json(postCreate);
@@ -113,6 +112,57 @@ router.put("/upvote", async (req, res) => {
   }
 });
 
+router.post("/image", async (req, res) => {
+  try {
+    // need front end function that selects url/file upload feature
+    // make a post to a user to test the route
+    // if (urlupload) {
+    //   urlUpload();
+    //   const image = await Image.create({
+    //     where: {
+    //       post_id: req.params.post_id,
+    //       user_id: req.params.user_id,
+    //     },
+    //   });
+    //   res.json(image);
+    // }
+    // if (file) {
+    let file = await fileUpload();
+    const postCreate = await Post.create({
+      title: "test",
+      content: "test",
+      user_id: 1, // add back req.session.user_id when login works
+    });
+    const image = await Image.create({
+      where: {
+        post_id: postCreate.post_id,
+        user_id: 1,
+        img_url: file,
+      },
+    });
+
+    res.json(image);
+    // }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get("/image", async (req, res) => {
+  try {
+    const image = await Image.findOne({
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (!image) {
+      res.status(404).json({ message: "No image found with this id " });
+      return;
+    }
+    res.json(image);
+  } catch (err) {}
+});
 router.put("/:id", async (req, res) => {
   try {
     const upDate = await Post.update(

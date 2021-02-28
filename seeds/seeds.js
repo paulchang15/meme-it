@@ -63,7 +63,8 @@ const postdata = [
   {
     title: 'Donec posuere metus vitae ipsum.',
     content: 'https://buzzfeed.com/in/imperdiet/et/commodo/vulputate.png',
-    user_id: 10
+    user_id: 10,
+    img_url: 'https://images.theconversation.com/files/177834/original/file-20170712-14488-19lw3sc.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop'
   },
   {
     title: 'Morbi non quam nec dui luctus rutrum.',

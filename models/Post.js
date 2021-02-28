@@ -13,7 +13,7 @@ class Post extends Model {
         },
         attributes: [
           "id",
-          "post_url",
+          "content",
           "title",
           "created_at",
           [
@@ -55,10 +55,10 @@ Post.init(
       type: DataTypes.STRING,
       allowNull: false,
     },
-    // content: {
-    //   type: DataTypes.TEXT,
-    //   allowNull: false,
-    // },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
@@ -66,12 +66,6 @@ Post.init(
         key: "id",
       },
       onDelete: "SET NULL",
-    },
-    post_url: {
-      type: DataTypes.STRING,
-      validate: {
-        isUrl: true,
-      },
     },
   },
   {
