@@ -8,7 +8,7 @@ router.get("/", async (req, res) => {
     const findPosts = await Post.findAll({
       attributes: [
         "id",
-        "post_url",
+        "content",
         "title",
         "created_at",
         [
@@ -44,7 +44,7 @@ router.get("/", async (req, res) => {
     console.log(findPosts[0]);
     await res.render("homepage", {
       posts,
-      loggedIn: req.session.loggedIn,
+      // loggedIn: req.session.loggedIn, // uncomment this back when session is active
     });
   } catch (err) {
     console.log(err);
@@ -73,7 +73,7 @@ router.get("/post/:id", async (req, res) => {
       },
       attributes: [
         "id",
-        "post_url",
+        "content",
         "title",
         "created_at",
         [

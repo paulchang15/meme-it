@@ -1,12 +1,13 @@
 const router = require("express").Router();
 const sequelize = require("../../config/connection");
-const { Post, User, Comment, Vote } = require("../../models");
+const { Post, User, Comment, Vote, Image } = require("../../models");
 const withAuth = require("../../utils/auth");
+const { fileUpload, urlUpload } = require("../../utils/imgur");
 
 router.get("/", async (req, res) => {
   try {
     const post = await Post.findAll({
-      attributes: ["id", "post_url", "title", "created_at"],
+      attributes: ["id", "content", "title", "created_at"],
       order: [["created_at", "DESC"]],
       include: [
         {
@@ -52,7 +53,7 @@ router.get("/:id", async (req, res) => {
       where: {
         id: req.params.id,
       },
-      attributes: ["id", "post_url", "title", "created_at"],
+      attributes: ["id", "content", "title", "created_at"],
       include: [
         {
           model: Comment,
@@ -87,7 +88,7 @@ router.post("/", async (req, res) => {
   try {
     const postCreate = await Post.create({
       title: req.body.title,
-      post_url: req.body.post_url,
+      content: req.body.content,
       user_id: req.body.user_id, // add back req.session.user_id when login works
     });
     res.json(postCreate);
@@ -113,6 +114,28 @@ router.put("/upvote", async (req, res) => {
   }
 });
 
+router.post("/image", async (req, res) => {
+  try {
+    // need front end function that selects url/file upload feature
+    if (urlupload) {
+      urlUpload();
+      const image = await Image.create({
+        // front end url
+      });
+      res.json(image);
+    }
+    if (file) {
+      fileUpload();
+      const image = await Image.create({
+        // front end url
+      });
+      res.json(image);
+    }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 router.put("/:id", async (req, res) => {
   try {
     const upDate = await Post.update(

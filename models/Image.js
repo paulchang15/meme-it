@@ -9,6 +9,10 @@ Image.init({
     primaryKey: true,
     autoIncrement: true,
   },
+  img_url: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
   user_id: {
     type: DataTypes.INTEGER,
     references: {
@@ -26,3 +30,5 @@ Image.init({
     onDelete: "SET NULL",
   },
 });
+
+module.exports = Image;

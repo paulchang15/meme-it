@@ -12,7 +12,6 @@ router.get("/", async (req, res) => {
       },
       attributes: [
         "id",
-        "post_url",
         "title",
         "created_at",
         [
@@ -57,7 +56,7 @@ router.get("/", async (req, res) => {
 router.post("/", async (req, res) => {
   const post = await Post.create({
     title: req.body.title,
-    post_url: req.body.post_url,
+    content: req.body.content,
     user_id: req.session.user_id,
   });
   res.json(post);
