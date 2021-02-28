@@ -52,9 +52,44 @@ const userdata = [
     password: "password123",
   },
 ];
-const seedAll = async () => {
+
+
+const seedUsers = async () => {
   await User.bulkCreate(userdata, { individualHooks: true });
 };
+// seedUsers();
+
+const postdata = [
+  {
+    title: 'Donec posuere metus vitae ipsum.',
+    content: 'https://buzzfeed.com/in/imperdiet/et/commodo/vulputate.png',
+    user_id: 10
+  },
+  {
+    title: 'Morbi non quam nec dui luctus rutrum.',
+    content: 'https://nasa.gov/donec.json',
+    user_id: 8
+  },
+  {
+    title: 'Donec diam neque, vestibulum eget, vulputate ut, ultrices vel, augue.',
+    content: 'https://europa.eu/parturient/montes/nascetur/ridiculus/mus/etiam/vel.aspx',
+    user_id: 1
+  }
+  
+];
+
+
+
+const seedPosts = async () => { 
+  await Post.bulkCreate(postdata);
+};
+
+const seedAll = async () => {
+  seedUsers();
+  seedPosts();
+};
+
 
 seedAll();
-module.exports = seedAll;
+
+module.exports = {seedAll};

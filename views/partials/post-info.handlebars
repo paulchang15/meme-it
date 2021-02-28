@@ -1,27 +1,12 @@
-<nav>
-    <div class="nav-wrapper">
-        <a href="/" class="brand-logo">iMemeit</a>
-        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-        <ul class="right hide-on-med-and-down">
-            {{#if loggedIn }}
-            <a href="/dashboard">dashboard</a>
-            <button id="logout" class="btn-no-style">logout</button>
-            {{else}}
-            <a href="/login">login</a>
-            {{/if}}
-        </ul>
+<article class="post">
+    <div class="title">
+        <a href="{{post_url}}" target="_blank">{{title}}</a>
+        <span>({{format_url post_url}})</span>
     </div>
-
-    <article class="post">
-        <div class="title">
-            <a href="{{post_url}}" target="_blank">{{title}}</a>
-            <span>({{format_url post_url}})</span>
-        </div>
-        <div class="meta">
-            {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
-            {{format_date created_at}}
-            |
-            <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
-        </div>
-    </article>
-</nav>
+    <div class="meta">
+        {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
+        {{format_date created_at}}
+        |
+        <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+    </div>
+</article>
