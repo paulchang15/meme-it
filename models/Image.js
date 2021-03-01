@@ -11,7 +11,7 @@ Image.init(
       autoIncrement: true,
     },
     img_url: {
-      type: DataTypes.INTEGER,
+      type: DataTypes.STRING,
       allowNull: false,
     },
     user_id: {
