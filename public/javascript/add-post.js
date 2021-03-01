@@ -8,7 +8,7 @@ async function newFormHandler(event) {
       method: 'POST',
       body: JSON.stringify({
         title,
-        content,
+        // content,
         img_url
       }),
       headers: {
@@ -19,7 +19,7 @@ async function newFormHandler(event) {
     if (newPost.ok) {
       document.location.replace('/dashboard');
     } else {
-      alert(response.statusText);
+      alert(newPost.statusText);
     }
   }
   

@@ -8,7 +8,8 @@ router.get("/", async (req, res) => {
   try {
     const allPosts = await Post.findAll({
       where: {
-        user_id: req.session.user_id,
+        // user_id: req.session.user_id,
+        user_id: 10 //take out when sessions is working
       },
       attributes: [
         "id",
@@ -42,11 +43,14 @@ router.get("/", async (req, res) => {
         },
       ],
     });
+    const posts = await allPosts.map((post) => post.get({ plain: true }));
+    
     if (!allPosts) {
       res.status(404).json({ message: "No posts found!" });
       return;
     }
-    res.json(allPosts);
+    console.log(posts);
+    await res.render('dashboard', {posts});
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

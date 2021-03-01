@@ -1,4 +1,4 @@
-<article>
+<section>
     <a href="/dashboard"> &larr; Back to dashboard</a>
     <h2>
         Edit Post
@@ -6,7 +6,7 @@
     <form class="edit-post-form">
         <div>
             <input name="post-title" type="text" value="{{post.title}}" />
-            <span>({{format_url image.img_url}})</span>
+            <span>({{format_url post.post_url}})</span>
         </div>
         <div>
             {{post.vote_count}} {{format_plural "point" post.vote_count}} by you on {{format_date post.created_at}}
@@ -17,7 +17,7 @@
         <button type="submit">Save post</button>
         <button type="button" class="delete-post-btn">Delete post</button>
     </form>
-</article>
+</section>
 <form class="comment-form">
     <div>
         <textarea name="comment-body"></textarea>
