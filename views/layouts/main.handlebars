@@ -20,15 +20,14 @@
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
         <!-- Button to open the modal login form -->
-        <button class="btn waves-effect waves-light"
-          onclick="document.getElementById('id01').style.display='block'">Login/Signup</button>
+        <a class="btn waves-effect waves-light" href="/login">Login/Signup</a>
         {{!-- {{#if loggedIn }} --}}
         <a class="btn waves-effect waves-light" href="/dashboard">dashboard</a>
         <a id="logout" href="/" class="btn waves-effect waves-light">logout</a>
         {{!-- {{else}} --}}
 
         <!-- The Modal -->
-        <div id="id01" class="modal">
+        {{!-- <div id="id01" class="modal">
           <span onclick="document.getElementById('id01').style.display='none'" class="close"
             title="Close Modal">&times;</span>
 
@@ -71,7 +70,7 @@
                 class="cancelbtn btn waves-effect waves-light">Cancel</button>
             </div>
           </form>
-        </div>
+        </div> --}}
         {{!-- {{/if}} --}}
       </ul>
     </div>
@@ -94,7 +93,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 {{!-- {{#if loggedIn}} --}}
 <script src="/javascript/logout.js"></script>
-{{!-- <script src="/javascript/login.js"></script> --}}
+<script src="/javascript/login.js"></script>
 {{!-- {{/if}} --}}
 
 </html>
