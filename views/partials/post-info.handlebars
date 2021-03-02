@@ -1,9 +1,10 @@
 <article class="post">
     <div class="title">
-        <a href="{{img_url}}" target="_blank">{{title}}</a>
-        <span>({{img_url}})</span>
+
+        {{!-- {{title}} --}}
     </div>
     <div class="meta">
+        <img src="{{img_url}}">
         {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
         {{format_date created_at}}
         |
