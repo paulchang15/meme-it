@@ -4,14 +4,14 @@ const file = document.getElementById("new-file");
 
 async function urlHandler(e) {
   e.preventDefault();
-  const newPost = await fetch(`https://api.imgur.com/3/image`, {
+  await fetch(`https://api.imgur.com/3/image`, {
     method: "POST",
     body: { image, type: "url" },
     headers: {
       Authorization: "Client-ID ebe2f73bc0d1a0d",
     },
   });
-  const newPost = await fetch(`/api/image`, {
+  await fetch(`/api/image`, {
     method: "POST",
     body: { img_url },
     headers: {
@@ -25,14 +25,14 @@ async function fileHandler(e) {
   console.log(this.files);
   e.preventDefault();
   //THIS IS WORKING COPY TO OTHER
-  const newPost = await fetch(`https://api.imgur.com/3/image`, {
+  await fetch(`https://api.imgur.com/3/image`, {
     method: "POST",
     body: { image, type: "file" },
     headers: {
       Authorization: "Client-ID ebe2f73bc0d1a0d",
     },
   });
-  const newPost = await fetch(`/api/image`, {
+  await fetch(`/api/image`, {
     method: "POST",
     body: { img_url },
     headers: {

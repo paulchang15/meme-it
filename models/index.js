@@ -65,5 +65,12 @@ User.hasOne(Image, {
 Post.hasOne(Image, {
   foreignKey: "post_id",
 });
+// add belongs to associations
+Image.belongsTo(Post, {
+  foreignKey: "post_id",
+});
 
+Image.belongsTo(User, {
+  through: "user_id",
+});
 module.exports = { User, Post, Comment, Vote, Image };
