@@ -1,26 +1,31 @@
 <section>
     <h2>Post a Meme</h2>
 
-    <form class="new-post-form">
+    <form class="new-post-form" action="/api/">
         <div>
             <label for="post-title">Title</label>
             <input type="text" id="post-title" name="post-title" />
         </div>
+
+
         <div>
-            <label for="img-url">Link</label>
-            <input id="img-url" name="img-url" />
+            <label for="img-url">
+                <input id="img-url" name="img-url" type="radio" />
+                <span>Upload URL</span>
+            </label>
+
+        </div>
+
+        <div>
+            <label>
+                <input type="file" id="new-file" name="filename">
+                <span>Upload file</span>
+            </label>
         </div>
 
 
-        <p>Click on the "Choose File" button to upload your meme!</p>
-        <form action="/action_page.php">
-            <input type="file" id="new-file" name="filename">
-        </form>
-
         <button id="image-submit" type="submit" class="btn">Post</button>
     </form>
-
-
 </section>
 
 {{#if posts.length}}

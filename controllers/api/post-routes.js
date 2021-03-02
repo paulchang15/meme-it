@@ -117,6 +117,13 @@ router.put("/upvote", async (req, res) => {
 
 router.post("/", async (req, res) => {
   try {
+    const newPost = await fetch(`https://api.imgur.com/3/image`, {
+      method: "POST",
+      body: { image, type: "file" },
+      headers: {
+        Authorization: "Client-ID ebe2f73bc0d1a0d",
+      },
+    });
     const post = await Post.create({
       title: req.body.title,
       content: req.body.content,
