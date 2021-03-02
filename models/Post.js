@@ -1,4 +1,4 @@
-const { Model, DataTypes, Sequelize } = require("sequelize");
+const { Model, DataTypes } = require("sequelize");  //I dont think we need Sequelize here because we are requiring it on the next line...
 const sequelize = require("../config/connection");
 
 class Post extends Model {
@@ -56,7 +56,7 @@ Post.init(
       allowNull: false,
     },
     content: {
-      type: DataTypes.TEXT,
+      type: DataTypes.TEXT, //Do we want TEXT here or also STRING? 
       allowNull: false,
     },
     user_id: {

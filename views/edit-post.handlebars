@@ -6,6 +6,7 @@
     <form class="edit-post-form">
         <div>
             <input name="post-title" type="text" value="{{post.title}}" />
+            {{!-- We dont need format_url on this now right? Will this actually be post.content? --}}
             <span>({{format_url post.img_url}})</span>
         </div>
         <div>

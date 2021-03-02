@@ -29,11 +29,9 @@ async function loadId() {
 
 async function fileUpload(image) {
   try {
-    await imgur.uploadFile(image);
-    await function (json) {
-      console.log(json.data.link);
-      return jason.data.link;
-    };
+    const upload = await imgur.uploadFile(image);
+
+    return upload.data.link;
   } catch (err) {
     console.error(err.message);
   }
@@ -41,13 +39,25 @@ async function fileUpload(image) {
 
 async function urlUpload(image) {
   try {
-    await imgur.uploadUrl(image);
-    await function (json) {
-      console.log(json.data.link);
-    };
+    const urlUpload = await imgur.uploadUrl(image);
+
+    return urlUpload.data.link;
   } catch (err) {
     console.error(err.message);
   }
 }
 
-module.exports = { fileUpload, urlUpload };
+//route to get image from
+async function getImage(imageId) {
+  try {
+    const image = await imgur.getInfo(imageId);
+    console.log(image);
+  } catch (err) {
+    console.log(err);
+    return err;
+  }
+}
+
+async function deleteImage(image) {}
+
+module.exports = { saveId, loadId, fileUpload, urlUpload };

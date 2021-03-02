@@ -58,7 +58,7 @@ Post.hasMany(Vote, {
 });
 
 // Image associations
-User.hasOne(Image, {
+User.hasOne(Image, {  // Cant User hasMany Image here?
   foreignKey: "user_id",
 });
 

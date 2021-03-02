@@ -1,11 +1,11 @@
 const router = require("express").Router();
-const sequelize = require("../../config/connection");
+// const sequelize = require("../../config/connection");  I dont think we need sequelize because we are not calling it anywhere
 const { Comment } = require("../../models");
 // const withAuth = require("../../utils/auth");
 
 router.get("/", async (req, res) => {
   try {
-    const comments = await Comment.findAll({});
+    const comments = await Comment.findAll();
 
     if (!comments) {
       res.status(404).json({ message: "There are no comments" });
@@ -30,7 +30,7 @@ router.post("/", async (req, res) => {
     }
   } catch (err) {
     console.log(err);
-    res.status(500).json(err);
+    res.status(400).json(err);
   }
 });
 
@@ -39,10 +39,11 @@ router.delete("/",  async (req, res) => {
     const deleteComment = await Comment.destroy({
       where: {
         id: req.params.id,
-      },
+      }
     });
     if (!deleteComment) {
       res.status(404).json({ message: "Can not find comment to delete" });
+      return;
     }
     res.json(deleteComment);
   } catch (err) {

@@ -1,13 +1,20 @@
 const router = require("express").Router();
+const { ConsoleWriter } = require("istanbul-lib-report");
 const sequelize = require("../../config/connection");
 const { Post, User, Comment, Vote, Image } = require("../../models");
 const withAuth = require("../../utils/auth");
-const { fileUpload, urlUpload } = require("../../utils/imgur");
+// const { fileUpload, urlUpload } = require("../../utils/imgur"); I think this is one of those random requires that vscode just adds without being told to
 
 router.get("/", async (req, res) => {
   try {
     const post = await Post.findAll({
-      attributes: ["id", "content", "title", "created_at"],
+      attributes: [
+        "id", 
+        "content", 
+        "title", 
+        "created_at",
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+    ],
       order: [["created_at", "DESC"]],
       include: [
         {
@@ -17,14 +24,7 @@ router.get("/", async (req, res) => {
             "comment_text",
             "post_id",
             "user_id",
-            "created_at",
-            [
-              sequelize.literal(
-                "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-              ),
-              "vote_count",
-            ],
-          ],
+            "created_at"],
           include: {
             model: User,
             attributes: ["username"],
@@ -34,10 +34,15 @@ router.get("/", async (req, res) => {
           model: User,
           attributes: ["username"],
         },
+        { model: Image, 
+          attributes: [
+            "img_url"
+          ] 
+        },
       ],
     });
     if (!post) {
-      res.status(404).json({ message: "There is no post with this id " });
+      res.status(404).json({ message: "There are no posts yet" });
       return;
     }
     res.json(post);
@@ -53,7 +58,13 @@ router.get("/:id", async (req, res) => {
       where: {
         id: req.params.id,
       },
-      attributes: ["id", "content", "title", "created_at"],
+      attributes: [
+      "id", 
+      "content", 
+      "title", 
+      "created_at",
+      [sequelize.literal('(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)'), 'vote_count']
+    ],
       include: [
         {
           model: Comment,
@@ -69,6 +80,8 @@ router.get("/:id", async (req, res) => {
             attributes: ["username"],
           },
         },
+
+        { model: Image, attributes: ["img_url"] },
       ],
     });
     if (!postId) {
@@ -82,72 +95,60 @@ router.get("/:id", async (req, res) => {
   }
 });
 
+
 router.post("/", async (req, res) => {
   try {
-    const postCreate = await Post.create({
+    const post = await Post.create({
       title: req.body.title,
       content: req.body.content,
-      user_id: req.body.user_id, // add back req.session.user_id when login works
+      user_id: req.session.user_id, // add back req.session.user_id when login works
     });
-    res.json(postCreate);
+    const image = await Image.create({
+      post_id: post.post_id,
+      user_id: req.session.user_id,
+      img_url: req.body.img_url,
+    });
+
+    res.json({ post, image });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
+
+// router.post("/", async (req, res) => { I think this route above this one replaces the need for this one right?
+//   try {
+//     const postCreate = await Post.create({
+//       title: req.body.title,
+//       content: req.body.content,
+//       user_id: req.session.user_id, // add back req.session.user_id when login works
+//     });
+//     res.json(postCreate);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
 
 router.put("/upvote", async (req, res) => {
   try {
-    const upVote = await Post.upvote(
-      {
-        ...req.body,
-        user_id: req.session.user_id,
-      },
-      { Vote, Comment, User }
-    );
-    res.json(upVote);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
+      if (req.session) {
+        const upVote = await Post.upvote(
+          {
+            ...req.body,
+            user_id: req.session.user_id,
+          },
+          { Vote, Comment, User }
+        );
+        res.json(upVote);
+      } 
+    } catch (err) {
+      console.log(err);
+      res.status(500).json(err);
+    }
+    
 });
 
-router.post("/image", async (req, res) => {
-  try {
-    // need front end function that selects url/file upload feature
-    // make a post to a user to test the route
-    // if (urlupload) {
-    //   urlUpload();
-    //   const image = await Image.create({
-    //     where: {
-    //       post_id: req.params.post_id,
-    //       user_id: req.params.user_id,
-    //     },
-    //   });
-    //   res.json(image);
-    // }
-    // if (file) {
-    let file = await fileUpload();
-    const postCreate = await Post.create({
-      title: "test",
-      content: "test",
-      user_id: 1, // add back req.session.user_id when login works
-    });
-    const image = await Image.create({
-      where: {
-        post_id: postCreate.post_id,
-        user_id: 1,
-        img_url: file,
-      },
-    });
-
-    res.json(image);
-    // }
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
 
 router.get("/image", async (req, res) => {
   try {
@@ -161,8 +162,12 @@ router.get("/image", async (req, res) => {
       return;
     }
     res.json(image);
-  } catch (err) {}
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
+
 router.put("/:id", async (req, res) => {
   try {
     const upDate = await Post.update(
@@ -191,12 +196,14 @@ router.delete("/:id", async (req, res) => {
     const deletePost = await Post.destroy({
       where: {
         id: req.params.id,
-      },
+      }
     });
     if (!deletePost) {
       res.status(404).json({ message: "No post found with this id " });
       return;
     }
+    res.json(deletePost);
+    
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

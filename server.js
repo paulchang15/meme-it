@@ -6,7 +6,6 @@ const exphbs = require("express-handlebars");
 const session = require("express-session");
 const { helpers, image } = require("./utils/index");
 const hbs = exphbs.create({ helpers, image });
-const imgur = require("imgur");
 
 const SequelizeStore = require("connect-session-sequelize")(session.Store);
 const app = express();
