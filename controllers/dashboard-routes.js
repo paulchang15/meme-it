@@ -8,8 +8,8 @@ router.get("/", async (req, res) => {
   try {
     const allPosts = await Post.findAll({
       where: {
-        // user_id: req.session.user_id,
-        user_id: 10 //take out when sessions is working
+        user_id: req.body.user_id, //add back to session later
+    
       },
       attributes: [
         "id",
