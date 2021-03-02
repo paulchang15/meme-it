@@ -1,12 +1,14 @@
-<section>
-    <a href="/dashboard"> &larr; Back to dashboard</a>
+<article>
+    {{!-- <a href="/dashboard"> &larr; Back to dashboard</a> I dont think we need this because we already have a
+    dashboard button in the nav bar right? --}}
     <h2>
         Edit Post
     </h2>
     <form class="edit-post-form">
         <div>
             <input name="post-title" type="text" value="{{post.title}}" />
-            <span>({{format_url post.post_url}})</span>
+            {{!-- We dont need format_url on this now right? Will this actually be post.content? --}}
+            <span>({{post.img_url}})</span>
         </div>
         <div>
             {{post.vote_count}} {{format_plural "point" post.vote_count}} by you on {{format_date post.created_at}}
@@ -17,7 +19,7 @@
         <button type="submit">Save post</button>
         <button type="button" class="delete-post-btn">Delete post</button>
     </form>
-</section>
+</article>
 <form class="comment-form">
     <div>
         <textarea name="comment-body"></textarea>

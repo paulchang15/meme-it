@@ -9,11 +9,16 @@
 
 
         <div>
+<<<<<<< HEAD
             <label for="img-url">
                 <input id="img-url" name="img-url" type="radio" />
                 <span>Upload URL</span>
             </label>
 
+=======
+            <label for="post-content">URL</label>
+            <input id="post-content" name="post-content" />
+>>>>>>> 9578d361a0a9a93c9adf2e8230a6d05ba322e600
         </div>
 
         <div>
@@ -23,6 +28,13 @@
             </label>
         </div>
 
+<<<<<<< HEAD
+=======
+        {{!-- <p>Click on the "Choose File" button to upload your meme!</p>
+        <form action="/action_page.php">
+            <input type="file" id="new-file" name="filename">
+        </form> --}}
+>>>>>>> 9578d361a0a9a93c9adf2e8230a6d05ba322e600
 
         <button id="image-submit" type="submit" class="btn">Post</button>
     </form>
@@ -35,7 +47,7 @@
         {{#each posts as |post|}}
         <li>
             {{> post-info post }}
-            <a href="/dashboard/api/{{post.id}}" class="waves-effect waves-light btn"><i
+            <a href="/dashboard/edit/{{post.id}}" class="waves-effect waves-light btn"><i
                     class="material-icons">edit</i></a>
             <a class="waves-effect waves-light btn"><i class="material-icons">keyboard_arrow_up</i></a>
         </li>

@@ -24,7 +24,7 @@ Comment.init(
         model: "user",
         key: "id",
       },
-      onDelete: "SET NULL",
+      onDelete: "SET NULL", // Still not smart enough to know exactly what this means. I know the module did not have this
     },
     post_id: {
       type: DataTypes.INTEGER,
@@ -32,7 +32,7 @@ Comment.init(
         model: "post",
         key: "id",
       },
-      onDelete: "SET NULL",
+      onDelete: "SET NULL",  // Still not smart enough to know exactly what this means. I know the module did not have this
     },
   },
   {
