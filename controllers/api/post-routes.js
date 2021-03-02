@@ -34,6 +34,7 @@ router.get("/", async (req, res) => {
           model: User,
           attributes: ["username"],
         },
+        { model: Image, attributes: ["img_url"] },
       ],
     });
     if (!post) {
@@ -69,6 +70,8 @@ router.get("/:id", async (req, res) => {
             attributes: ["username"],
           },
         },
+
+        { model: Image, attributes: ["img_url"] },
       ],
     });
     if (!postId) {
@@ -82,19 +85,19 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
-  try {
-    const postCreate = await Post.create({
-      title: req.body.title,
-      content: req.body.content,
-      user_id: req.body.user_id, // add back req.session.user_id when login works
-    });
-    res.json(postCreate);
-  } catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
-});
+// router.post("/", async (req, res) => {
+//   try {
+//     const postCreate = await Post.create({
+//       title: req.body.title,
+//       content: req.body.content,
+//       user_id: req.session.user_id, // add back req.session.user_id when login works
+//     });
+//     res.json(postCreate);
+//   } catch (err) {
+//     console.log(err);
+//     res.status(500).json(err);
+//   }
+// });
 
 router.put("/upvote", async (req, res) => {
   try {
@@ -112,37 +115,20 @@ router.put("/upvote", async (req, res) => {
   }
 });
 
-router.post("/image", async (req, res) => {
+router.post("/", async (req, res) => {
   try {
-    // need front end function that selects url/file upload feature
-    // make a post to a user to test the route
-    // if (urlupload) {
-    //   urlUpload();
-    //   const image = await Image.create({
-    //     where: {
-    //       post_id: req.params.post_id,
-    //       user_id: req.params.user_id,
-    //     },
-    //   });
-    //   res.json(image);
-    // }
-    // if (file) {
-    let file = await fileUpload();
-    const postCreate = await Post.create({
-      title: "test",
-      content: "test",
-      user_id: 1, // add back req.session.user_id when login works
+    const post = await Post.create({
+      title: req.body.title,
+      content: req.body.content,
+      user_id: req.session.user_id, // add back req.session.user_id when login works
     });
     const image = await Image.create({
-      where: {
-        post_id: postCreate.post_id,
-        user_id: 1,
-        img_url: file,
-      },
+      post_id: post.post_id,
+      user_id: req.session.user_id,
+      img_url: req.body.img_url,
     });
 
-    res.json(image);
-    // }
+    res.json({ post, image });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -163,6 +149,7 @@ router.get("/image", async (req, res) => {
     res.json(image);
   } catch (err) {}
 });
+
 router.put("/:id", async (req, res) => {
   try {
     const upDate = await Post.update(
