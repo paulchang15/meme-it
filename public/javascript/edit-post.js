@@ -9,7 +9,7 @@ async function editFormHandler(event) {
       method: 'PUT',
       body: JSON.stringify({
         title,
-        content
+        // content  Commenting this out for now so I can try and play with it
       }),
       headers: {
         'Content-Type': 'application/json'

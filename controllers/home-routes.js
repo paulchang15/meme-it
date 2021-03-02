@@ -4,7 +4,7 @@ const { Post, User, Comment } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
-    console.log(req.session);
+    // console.log(req.session);
     const findPosts = await Post.findAll({
       attributes: [
         "id",
@@ -54,10 +54,10 @@ router.get("/", async (req, res) => {
 
 router.get("/login", async (req, res) => {
   try {
-    if (req.session.loggedIn) {
-      res.redirect("/");
-      return;
-    }
+    // if (req.session.loggedIn) {
+    //   res.redirect("/");
+    //   return;
+    // }
 
     res.render("login");
   } catch (err) {
@@ -112,7 +112,7 @@ router.get("/post/:id", async (req, res) => {
 
     res.render("single-post", {
       post,
-      loggedIn: req.session.loggedIn,
+      // loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     console.log(err);

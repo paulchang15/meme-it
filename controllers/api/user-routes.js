@@ -96,7 +96,7 @@ router.post("/login", async (req, res) => {
       return;
     }
 
-    const userLogin = await ((dbUserData) => {                          // Again I think we need another User.findOne in order to create another variable to store this data in...
+    const validLogin = await ((dbUserData) => {                          // Again I think we need another User.findOne in order to create another variable to store this data in...
       const validPassword = dbUserData.checkPassword(req.body.password);
 
       if (!validPassword) {
