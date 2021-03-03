@@ -21,7 +21,6 @@ const userdata = [
 const postdata = [
   {
     title: "Donec posuere metus vitae ipsum.",
-    content: "Yoda Meme",
     user_id: 1,
   },
   // {
