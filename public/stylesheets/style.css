@@ -50,8 +50,13 @@
   text-align: center;
 }
 
+.card {
+  padding: 20px;
+}
+
 /* adding padding to the nav */
 .nav-wrapper {
+  border-spacing: 2px;
 }
 
 @-webkit-keyframes animatezoom {

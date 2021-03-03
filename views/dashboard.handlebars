@@ -1,47 +1,52 @@
-<section>
-    <h2>Post a Meme</h2>
+<div class="container">
+    <div class="col l12 m8 s6 offset-s3"><span class="flow-text"></span>
+        <div class="card col l8 m10 s12">
+            <section>
+                <h2>Post a Meme</h2>
 
-    <form class="new-post-form" action="/api/">
-        <div>
-            <label for="post-title">Title</label>
-            <input type="text" id="post-title" name="post-title" />
+                <form class="new-post-form" action="/api/">
+                    <div>
+                        <label for="post-title">Title</label>
+                        <input type="text" id="post-title" name="post-title" />
+                    </div>
+                    <div>
+                        <label for="post-content">Content</label>
+                        <input type="text" id="post-content" name="post-content" />
+                    </div>
+
+                    <div>
+                        <label for="img-url">Image URL</label>
+                        <input type="text" id="img-url" name="img-url" type="radio" />
+                    </div>
+
+                    <div>
+                        <label>
+                            <input type="file" id="new-file" name="filename">
+                            <span>Upload file</span>
+                        </label>
+                    </div>
+
+
+                    <button id="image-submit" type="submit" class="btn">Post</button>
+                </form>
+            </section>
+
+            {{#if posts.length}}
+            <section>
+                <h2> Your Posts</h2>
+                <ol>
+                    {{#each posts as |post|}}
+                    <li>
+                        {{> post-info post }}
+                        <a href="/dashboard/edit/{{post.id}}" class="waves-effect waves-light btn"><i
+                                class="material-icons">edit</i></a>
+                        <a class="waves-effect waves-light btn"><i class="material-icons">keyboard_arrow_up</i></a>
+                    </li>
+                    {{/each}}
+                </ol>
+            </section>
+            {{/if}}
         </div>
-        <div>
-            <label for="post-content">Content</label>
-            <input type="text" id="post-content" name="post-content" />
-        </div>
-
-        <div>
-            <label for="img-url">Image URL</label>
-            <input type="text" id="img-url" name="img-url" type="radio" />
-        </div>
-
-        <div>
-            <label>
-                <input type="file" id="new-file" name="filename">
-                <span>Upload file</span>
-            </label>
-        </div>
-
-
-        <button id="image-submit" type="submit" class="btn">Post</button>
-    </form>
-</section>
-
-{{#if posts.length}}
-<section>
-    <h2> Your Posts</h2>
-    <ol>
-        {{#each posts as |post|}}
-        <li>
-            {{> post-info post }}
-            <a href="/dashboard/edit/{{post.id}}" class="waves-effect waves-light btn"><i
-                    class="material-icons">edit</i></a>
-            <a class="waves-effect waves-light btn"><i class="material-icons">keyboard_arrow_up</i></a>
-        </li>
-        {{/each}}
-    </ol>
-</section>
-{{/if}}
-
+    </div>
+</div>
 <script src="/javascript/add-post.js"></script>

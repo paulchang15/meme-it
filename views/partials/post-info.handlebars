@@ -1,13 +1,19 @@
-<article class="post">
-    <div class="title">
-        <a href="{{img_url}}" target="_blank">{{title}}</a>
-        <img src="{{img_url}}">
-    </div>
-    <div class="meta">
+<div class="container">
+    <div class="col l12 m8 s6 offset-s3"><span class="flow-text"></span>
+        <div class="col l8 m10 s12">
+            <article class="post">
+                <div class="title">
+                    <a href="/dashboard/edit/{{id}}" target="_blank">{{title}}</a>
+                    <img src="{{img_url}}">
+                </div>
+                <div class="meta">
 
-        {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
-        {{format_date created_at}}
-        |
-        <a href="/api/posts/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+                    {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
+                    {{format_date created_at}}
+                    |
+                    <a href="/api/posts/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+                </div>
+            </article>
+        </div>
     </div>
-</article>
+</div>
