@@ -108,10 +108,10 @@ router.get("/post/:id", async (req, res) => {
       res.status(404).json({ message: "No post found!" });
       return;
     }
-    const post = dbPostData.get({ plain: true });
+    const posts = await findPost.map((post) => post.get({ plain: true }));
 
-    res.render("single-post", {
-      post,
+    await res.render("single-post", {
+      posts,
       // loggedIn: req.session.loggedIn,
     });
   } catch (err) {
