@@ -9,7 +9,7 @@ async function newFormHandler(event) {
     body: JSON.stringify({
       title,
       content,
-      // img_url  // pretty sure we dont need this here because our post table currently doesnt have a img_url field
+      img_url,
     }),
     headers: {
       "Content-Type": "application/json",
@@ -22,6 +22,11 @@ async function newFormHandler(event) {
     alert(newPost.statusText);
   }
 }
+
+document.addEventListener("", function () {
+  var elems = document.querySelectorAll("select");
+  var instances = M.FormSelect.init(elems, options);
+});
 
 document
   .querySelector(".new-post-form")

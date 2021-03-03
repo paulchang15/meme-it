@@ -1,14 +1,14 @@
 <section>
     <h2>Post a Meme</h2>
 
-    <form class="new-post-form" action="/api/">
+    <form class="new-post-form input-field col s12" action="/api/">
         <div>
             <label for="post-title">Title</label>
             <input type="text" id="post-title" name="post-title" />
         </div>
 
 
-        <div>
+        {{!-- <div>
             <label for="img-url">
                 <input id="img-url" name="img-url" type="radio" />
                 <span>Upload URL</span>
@@ -17,11 +17,40 @@
         </div>
 
         <div>
-            <label>
-                <input type="file" id="new-file" name="filename">
+            <label for="img-url">
+                <input id="img-url" name="img-url" type="radio" />
                 <span>Upload file</span>
             </label>
-        </div>
+
+        </div> --}}
+
+        <label>Choose how to upload your meme</label>
+        <select>
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">URL</option>
+            <option value="2">File</option>
+        </select>
+
+
+        {{!--
+        <label>Browser Select</label>
+        <select class="browser-default">
+            <option value="" disabled selected>Choose your option</option>
+            <option value="1">Option 1</option>
+            <option value="2">Option 2</option>
+            <option value="3">Option 3</option>
+        </select> --}}
+
+        {{!-- Create a form input here for the user to input their URL and hide it when Upload file is checked --}}
+
+        {{!-- ---------------------------- --}}
+
+        {{!-- hide this choose file when Upload URL is clicked --}}
+        {{!-- <div>
+            <label>
+                <input type="file" id="new-file" name="filename">
+            </label>
+        </div> --}}
 
 
         <button id="image-submit" type="submit" class="btn">Post</button>

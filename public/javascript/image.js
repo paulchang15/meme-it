@@ -45,17 +45,20 @@ function imageChoice() {
   if (file) {
     fileHandler(file);
   }
+  if (urlLink) {
+    urlHandler(urlLink);
+  }
 }
 // fetch function to get the image
-async function getInfo() {
-  const newPost = await fetch(`/api/image`, {
-    method: "GET",
+// async function getInfo() {
+//   const newPost = await fetch(`/api/image`, {
+//     method: "GET",
 
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-}
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   });
+// }
 
 uploadedImage.addEventListener("change");
 document
