@@ -3,7 +3,7 @@
         <div class="card col s6">
             {{> post-info post }}
 
-            {{!-- {{#if loggedIn }} --}}
+            {{#if loggedIn }}
             <form class="comment-form">
                 <div>
                     <textarea name="comment-body"></textarea>
@@ -15,12 +15,12 @@
                             class="material-icons upvote-btn">keyboard_arrow_up</i></a>
                 </div>
             </form>
-            {{!-- {{/if}} --}}
+            {{/if}}
             {{> comments post.comments }}
         </div>
     </div>
 </div>
-{{!-- {{#if loggedIn }} --}}
+{{#if loggedIn }}
 <script src="/javascript/comment.js"></script>
 <script src="/javascript/upvote.js"></script>
-{{!-- {{/if}} --}}
+{{/if}}

@@ -1,31 +1,31 @@
-const uploadedImage = document.getElementById("new-file");
-const urlLink = document.getElementById("img-url");
-// const file = document.getElementById("new-file");
-const dropDown = document.getElementById("drop-down");
-const url = document.getElementById("url");
+// const uploadedImage = document.getElementById("new-file");
+// // const urlLink = document.getElementById("img-url");
+// // const file = document.getElementById("new-file");
+// // const dropDown = document.getElementById("drop-down");
+// const url = document.getElementById("url");
 
-async function urlHandler(e) {
-  e.preventDefault();
-  console.log(url.value);
-  // const imgurRes = await fetch(`https://api.imgur.com/3/image`, {
-  //   method: "POST",
-  //   body: JSON.stringify({ image: url.value }),
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //     Authorization: "Client-ID ebe2f73bc0d1a0d",
-  //   },
-  // });
+// async function urlHandler(e) {
+//   e.preventDefault();
+//   console.log(url.value);
+//   // const imgurRes = await fetch(`https://api.imgur.com/3/image`, {
+//   //   method: "POST",
+//   //   body: JSON.stringify({ image: url.value }),
+//   //   headers: {
+//   //     "Content-Type": "application/json",
+//   //     Authorization: "Client-ID ebe2f73bc0d1a0d",
+//   //   },
+//   // });
 
-  // const imgurJson = await imgurRes.json();
-  console.log(JSON.stringify(url.value));
-  await fetch("/api/posts/", {
-    method: "POST",
-    body: JSON.stringify({ img_url: url.value }),
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-}
+//   // const imgurJson = await imgurRes.json();
+//   console.log(JSON.stringify(url.value));
+//   await fetch("/api/posts/", {
+//     method: "POST",
+//     body: JSON.stringify({ img_url: url.value }),
+//     headers: {
+//       "Content-Type": "application/json",
+//     },
+//   });
+// }
 
 // async function fileHandler(e) {
 //   e.preventDefault();
@@ -51,17 +51,17 @@ async function urlHandler(e) {
 //   });
 // }
 
-function imageChoice(event) {
-  event.preventDefault();
-  console.log(dropDown.value);
-  dropDown.value;
-  if (dropDown.value === "file") {
-    fileHandler();
-  }
-  if (dropDown.value === "url") {
-    urlHandler(event);
-  }
-}
+// function imageChoice(event) {
+//   event.preventDefault();
+//   console.log(dropDown.value);
+//   dropDown.value;
+//   if (dropDown.value === "file") {
+//     fileHandler();
+//   }
+//   if (dropDown.value === "url") {
+//     urlHandler(event);
+//   }
+// }
 // fetch function to get the image
 // async function getInfo() {
 //   const newPost = await fetch(`/api/image`, {
@@ -73,9 +73,7 @@ function imageChoice(event) {
 //   });
 // }
 
-uploadedImage.addEventListener("change", (event) => {
-  fileHandler(event);
-});
-document
-  .querySelector(".new-post-form")
-  .addEventListener("submit", imageChoice);
+// uploadedImage.addEventListener("change", (event) => {
+//   fileHandler(event);
+// });
+// document.querySelector(".new-post-form").addEventListener("submit", urlHandler);

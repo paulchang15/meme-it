@@ -28,68 +28,23 @@
       <ul class="right hide-on-med-and-down">
         <!-- Button to open the modal login form -->
         <a class="btn waves-effect waves-light" href="/login">Login/Signup</a>
-        {{!-- {{#if loggedIn }} --}}
+        {{#if loggedIn }}
         <a class="btn waves-effect waves-light" href="/dashboard">dashboard</a>
         <a id="logout" href="/" class="btn waves-effect waves-light">logout</a>
-        {{!-- {{else}} --}}
-
-        <!-- The Modal -->
-        {{!-- <div id="id01" class="modal">
-          <span onclick="document.getElementById('id01').style.display='none'" class="close"
-            title="Close Modal">&times;</span>
-
-          <!-- Modal Content -->
-          <form class="modal-content animate col s12" action="/action_page.php">
-
-            <div class="row">
-              <label for="uname"><b>Username</b></label>
-              <input type="text" placeholder="Username" name="uname" required>
-
-              <label for="psw"><b>Password</b></label>
-              <input type="password" placeholder="Password" name="psw" required>
-
-              <button class="btn waves-effect waves-light" type="submit" name="action">Login</button>
-            </div>
-
-            <div class="row">
-              <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                class="cancelbtn btn waves-effect waves-light">Cancel</button>
-            </div>
-          </form>
-          <h6 class="seperator">OR</h6>
-          <form class="modal-content animate col s12" action="/action_page.php">
-
-            <div class="row">
-              <label for="uname"><b>Username</b></label>
-              <input type="text" placeholder="Username" name="uname" required>
-
-              <label for="psw"><b>Password</b></label>
-              <input type="password" placeholder="Password" name="psw" required>
-
-              <label for="email"><b>Email</b></label>
-              <input type="text" placeholder="Email" name="email" required>
-
-              <button class="btn waves-effect waves-light" type="submit">Signup</button>
-            </div>
-
-            <div class="row">
-              <button type="button" onclick="document.getElementById('id01').style.display='none'"
-                class="cancelbtn btn waves-effect waves-light">Cancel</button>
-            </div>
-          </form>
-        </div> --}}
-        {{!-- {{/if}} --}}
+        {{else}}
+        <a href="/login">login</a>
+        {{/if}}
       </ul>
     </div>
   </nav>
-  <ul class="sidenav" id="mobile-demo">
-    {{!-- {{#if loggedIn }} --}}
+  {{!-- <ul class="sidenav" id="mobile-demo">
+    {{#if loggedIn }}
     <a href="/dashboard">dashboard</a>
     <button id="logout" class="btn waves-effect waves-light">logout</button>
-    {{!-- {{else}} --}}
+    {{else}}
     <a href="/">login</a>
-    {{!-- {{/if}} --}}
-  </ul>
+    {{/if}}
+  </ul> --}}
 </header>
 
 <body>
@@ -98,11 +53,12 @@
 
 <!--JavaScript at end of body for optimized loading-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-{{!-- {{#if loggedIn}} --}}
+{{!--
+<script src="/javascript/image.js"></script> --}}
+{{#if loggedIn}}
 <script src="/javascript/logout.js"></script>
-<script src="/javascript/login.js"></script>
-{{!-- {{/if}} --}}
-<script src="/javascript/image.js"></script>
+{{/if}}
+
 
 
 </html>
