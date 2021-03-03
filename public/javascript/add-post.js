@@ -10,11 +10,7 @@ async function newFormHandler(event) {
     body: JSON.stringify({
       title,
       content,
-<<<<<<< HEAD
       img_url,
-=======
-      img_url  
->>>>>>> 1232bc42def5bf0b76ef88b2d1708fa525f380f8
     }),
     headers: {
       "Content-Type": "application/json",
@@ -33,6 +29,6 @@ document.addEventListener("", function () {
   var instances = M.FormSelect.init(elems, options);
 });
 
-document
-  .querySelector(".new-post-form")
-  .addEventListener("submit", newFormHandler);
+// document
+//   .querySelector(".new-post-form")
+//   .addEventListener("submit", newFormHandler);

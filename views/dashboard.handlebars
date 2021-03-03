@@ -1,12 +1,11 @@
 <section>
     <h2>Post a Meme</h2>
 
-    <form class="new-post-form input-field col s12" action="/api/">
+    <form class="new-post-form">
         <div>
             <label for="post-title">Title</label>
             <input type="text" id="post-title" name="post-title" />
         </div>
-<<<<<<< HEAD
 
 
         {{!-- <div>
@@ -14,56 +13,54 @@
                 <input id="img-url" name="img-url" type="radio" />
                 <span>Upload URL</span>
             </label>
-=======
-        <div>
-            <label for="post-content">Content</label>
-            <input type="text" id="post-content" name="post-content" />
-        </div>
->>>>>>> 1232bc42def5bf0b76ef88b2d1708fa525f380f8
 
-        <div>
-            <label for="img-url">Image URL</label>
-            <input type="text" id="img-url" name="img-url" type="radio" />
-        </div>
+            <div>
+                <label for="img-url">Image URL</label>
+                <input type="text" id="img-url" name="img-url" type="radio" />
+            </div>
 
-        <div>
-            <label for="img-url">
-                <input id="img-url" name="img-url" type="radio" />
-                <span>Upload file</span>
-            </label>
+            <div>
+                <label for="img-url">
+                    <input id="img-url" name="img-url" type="radio" />
+                    <span>Upload file</span>
+                </label>
 
-        </div> --}}
+            </div> --}}
+            {{!-- <div>
+                <label>Choose how to upload your meme</label>
+                <select>
+                    <option value="" disabled selected>Choose your option</option>
+                    <option id="url" value="1">URL</option>
+                    <option id="file" value="2">File</option>
+                </select>
+            </div> --}}
 
-        <label>Choose how to upload your meme</label>
-        <select>
-            <option value="" disabled selected>Choose your option</option>
-            <option value="1">URL</option>
-            <option value="2">File</option>
-        </select>
-
-
-        {{!--
-        <label>Browser Select</label>
-        <select class="browser-default">
-            <option value="" disabled selected>Choose your option</option>
-            <option value="1">Option 1</option>
-            <option value="2">Option 2</option>
-            <option value="3">Option 3</option>
-        </select> --}}
-
-        {{!-- Create a form input here for the user to input their URL and hide it when Upload file is checked --}}
-
-        {{!-- ---------------------------- --}}
-
-        {{!-- hide this choose file when Upload URL is clicked --}}
-        {{!-- <div>
-            <label>
-                <input type="file" id="new-file" name="filename">
-            </label>
-        </div> --}}
+            <div class="input-field col s6">
+                <input placeholder="Placeholder" id="url" type="text" class="validate">
+                <label for="url">URL</label>
+            </div>
 
 
-        <button id="image-submit" type="submit" class="btn">Post</button>
+            <label>Browser Select</label>
+            <select id="drop-down" class="browser-default">
+                <option value="" disabled selected>How do you want to upload</option>
+                <option value="url">URL</option>
+                <option value="file">File</option>
+            </select>
+
+            {{!-- Create a form input here for the user to input their URL and hide it when Upload file is checked --}}
+
+            {{!-- ---------------------------- --}}
+
+            {{!-- hide this choose file when Upload URL is clicked --}}
+            <div>
+                <label>
+                    <input type="file" id="new-file" name="filename">
+                </label>
+            </div>
+
+
+            <button id="image-submit" type="submit" class="btn">Post</button>
     </form>
 </section>
 
