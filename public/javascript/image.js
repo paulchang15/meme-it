@@ -73,7 +73,7 @@ function imageChoice(event) {
 //   });
 // }
 
-uploadedImage.addEventListener("change", (event) => {
+uploadedImage.addEventListener("change", (event) => {  //I dont think we need this anymore right?
   fileHandler(event);
 });
 document

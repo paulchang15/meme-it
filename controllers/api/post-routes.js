@@ -2,7 +2,6 @@ const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { Post, User, Comment, Vote, Image } = require("../../models");
 const withAuth = require("../../utils/auth");
-const { fileUpload, urlUpload } = require("../../utils/imgur");
 const axios = require("axios");
 router.get("/", async (req, res) => {
   try {
