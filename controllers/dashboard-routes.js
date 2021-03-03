@@ -121,7 +121,7 @@ router.get("/edit/:id", async (req, res) => {
   }
     });
 
-//I dont think we need this actually since the post-routes has this route already with the others as well
+//I dont think we need this actually since the post-routes has this route already with the
 // router.post("/", async (req, res) => {
 //   const post = await Post.create({
 //     title: req.body.title,

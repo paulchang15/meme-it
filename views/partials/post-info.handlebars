@@ -1,13 +1,13 @@
 <article class="post">
     <div class="title">
-
-        {{!-- {{title}} --}}
+        <a href="{{img_url}}" target="_blank">{{title}}</a>
+        <img src="{{img_url}}">
     </div>
     <div class="meta">
-        <img src="{{img_url}}">
+
         {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
         {{format_date created_at}}
         |
-        <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+        <a href="/api/posts/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
     </div>
 </article>

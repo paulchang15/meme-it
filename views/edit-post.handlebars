@@ -13,7 +13,7 @@
         <div>
             {{post.vote_count}} {{format_plural "point" post.vote_count}} by you on {{format_date post.created_at}}
             |
-            <a href="/post/{{post.id}}">{{post.comments.length}}
+            <a href="/api/posts/{{post.id}}">{{post.comments.length}}
                 {{format_plural "comment" post.comments.length}}</a>
         </div>
         <button type="submit">Save post</button>
