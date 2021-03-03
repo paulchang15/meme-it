@@ -10,22 +10,27 @@ User.hasMany(Post, {
 
 Post.belongsTo(User, {
   foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
 Comment.belongsTo(User, {
   foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
 Comment.belongsTo(Post, {
   foreignKey: "post_id",
+  onDelete: "SET NULL",
 });
 
 User.hasMany(Comment, {
   foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
 Post.hasMany(Comment, {
   foreignKey: "post_id",
+  onDelete: "SET NULL",
 });
 
 // Vote Associations
@@ -33,20 +38,24 @@ User.belongsToMany(Post, {
   through: Vote,
   as: "voted_posts",
   foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
 Post.belongsToMany(User, {
   through: Vote,
   as: "voted_posts",
   foreignKey: "post_id",
+  onDelete: "SET NULL",
 });
 
 Vote.belongsTo(User, {
   foreignKey: "user_id",
+  onDelete: "SET NULL",
 });
 
 Vote.belongsTo(Post, {
   foreignKey: "post_id",
+  onDelete: "SET NULL",
 });
 
 User.hasMany(Vote, {
@@ -58,7 +67,8 @@ Post.hasMany(Vote, {
 });
 
 // Image associations
-User.hasOne(Image, {  // Cant User hasMany Image here?
+User.hasOne(Image, {
+  // Cant User hasMany Image here?
   foreignKey: "user_id",
 });
 
@@ -68,9 +78,12 @@ Post.hasOne(Image, {
 // add belongs to associations
 Image.belongsTo(Post, {
   foreignKey: "post_id",
+  onDelete: "SET NULL",
 });
 
 Image.belongsTo(User, {
   through: "user_id",
+  onDelete: "SET NULL",
 });
+
 module.exports = { User, Post, Comment, Vote, Image };

@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User, Post, Vote, Comment } = require("../../models");
+const { User, Post, Vote, Comment, Image } = require("../../models");
 // const sequelize = require("../../config/connection"); I dont think we need sequelize here...?
 
 router.get("/", async (req, res) => {
@@ -44,6 +44,14 @@ router.get("/:id", async (req, res) => {
           through: Vote,
           as: "voted_posts",
         },
+        {
+          model: Image,
+          attributes: ["img_url"],
+          include: {
+            model: Post,
+            attributes: ["title"],
+          },
+        },
       ],
     });
     if (!user) {
@@ -64,17 +72,17 @@ router.post("/", async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    // Yeah this is broken I'm not sure how to get this right with the await function.
-    const userSave = await ((userSave) => {
+
+    const userSave = await (() => {
       req.session.save(() => {
-        (req.session.user_id = userSave.id),
-          (req.session.username = userSave.username),
+        (req.session.user_id = userPost.id),
+          (req.session.username = userPost.username),
           (req.session.loggedIn = true);
 
-        res.json(userSave);
+        res.json(userPost);
       });
     });
-    res.json(userPost);
+    res.json(userSave);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -85,7 +93,7 @@ router.post("/login", async (req, res) => {
   try {
     const userLogin = await User.findOne({
       where: {
-        username: req.body.username, // I changed this to username because I have the login.js set to use the username instead of email
+        username: req.body.username,
       },
     });
 
@@ -95,7 +103,6 @@ router.post("/login", async (req, res) => {
     }
 
     const validation = await (() => {
-      // Again I think we need another User.findOne in order to create another variable to store this data in...
       const validPassword = userLogin.checkPassword(req.body.password);
 
       if (!validPassword) {

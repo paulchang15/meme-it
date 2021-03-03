@@ -3,7 +3,7 @@ const sequelize = require("../../config/connection");
 const { Post, User, Comment, Vote, Image } = require("../../models");
 const withAuth = require("../../utils/auth");
 const { fileUpload, urlUpload } = require("../../utils/imgur");
-
+const axios = require("axios");
 router.get("/", async (req, res) => {
   try {
     const post = await Post.findAll({
@@ -130,18 +130,32 @@ router.post("/", async (req, res) => {
     //     Authorization: "Client-ID ebe2f73bc0d1a0d",
     //   },
     // });
-    const post = await Post.create({
-      title: req.body.title,
-      content: req.body.content,
-      user_id: req.session.user_id, // add back req.session.user_id when login works
-    });
+
+    console.log(typeof req.body.img_url);
+
+    const newPost = await axios.post(
+      `https://api.imgur.com/3/image`,
+      { image: req.body.img_url },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Client-ID ebe2f73bc0d1a0d",
+        },
+      }
+    );
+    console.log(newPost.data);
+    // const post = await Post.create({
+    //   title: "", // req.body.title
+    //   content: "", //req.body.content
+    //   user_id: req.session.user_id, // add back req.session.user_id when login works
+    // });
     const image = await Image.create({
-      post_id: post.post_id,
-      user_id: req.session.user_id,
-      img_url: req.body.img_url,
+      post_id: 1,
+      user_id: 1,
+      img_url: newPost.data.data.link,
     });
 
-    res.json({ post, image });
+    res.send(newPost.data.link);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
