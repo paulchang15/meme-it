@@ -73,16 +73,7 @@
 //   });
 // }
 
-<<<<<<< HEAD
 // uploadedImage.addEventListener("change", (event) => {
 //   fileHandler(event);
 // });
 // document.querySelector(".new-post-form").addEventListener("submit", urlHandler);
-=======
-uploadedImage.addEventListener("change", (event) => {  //I dont think we need this anymore right?
-  fileHandler(event);
-});
-document
-  .querySelector(".new-post-form")
-  .addEventListener("submit", imageChoice);
->>>>>>> 620ac5ae4290e90bdf7ab54d14d6166d460b2c90
