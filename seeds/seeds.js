@@ -23,11 +23,11 @@ const postdata = [
     title: "Donec posuere metus vitae ipsum.",
     user_id: 1,
   },
-  // {
-  //   title: "Donec posuere metus vitae ipsum.",
-  //   content: "Yoda Meme",
-  //   user_id: 2,
-  // },
+  {
+    title: "Donec posuere metus vitae ipsum.",
+    content: "Pikachu Meme",
+    user_id: 2,
+  },
   // {
   //   title: "Donec posuere metus vitae ipsum.",
   //   content: "Yoda Meme",
@@ -42,6 +42,11 @@ const imgdata = [
     user_id: 1,
     post_id: 1,
   },
+  {
+    img_url: "https://i.redd.it/ig5u8ke5qo421.png",
+    user_id: 2,
+    post_id: 2,
+  },
 ];
 
 const commentData = [
@@ -49,6 +54,11 @@ const commentData = [
     comment_text: "test comment",
     user_id: 1,
     post_id: 1,
+  },
+  {
+    comment_text: "LOL",
+    user_id: 2,
+    post_id: 2,
   },
 ];
 

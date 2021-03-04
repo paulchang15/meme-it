@@ -54,7 +54,7 @@ router.get("/", withAuth, async (req, res) => {
     }
     console.log("-----------------dashboard posts---------------------");
     console.log(posts);
-    await res.render("dashboard", { posts, loggedIn: req.session.loggedIn });
+    await res.render("dashboard", { posts, loggedIn: true });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
