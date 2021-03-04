@@ -8,8 +8,16 @@ body{
 .container{
   display: inline-flex;
   flex-wrap: wrap;
-  align-items: flex-start;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+  grid-auto-rows: auto;
+  gap: 20px;
+  padding: 50px;
+  width: 30%;
   
+}
+
+.btn{
+  border-radius: 7px;
 }
 
 ul{
@@ -70,10 +78,16 @@ nav .brand-logo{
 .post{
   background-color: white;
   width: auto;
-  border-radius: 25px;
+  border-radius: 15px;
 
 
 }
+
+.post-content{
+
+  align-content: center;
+}
+
 
 
 
@@ -82,7 +96,7 @@ nav .brand-logo{
   border-radius: 25px;
 }
 
-.meme-img{
+.card_image{
   width: 500px;
   height: auto;
   Margin: 0px 30px;
@@ -103,6 +117,29 @@ nav .brand-logo{
 
   display: flex;
   flex-wrap: wrap;
+}
+
+.comment_button{
+font-size: 20px;
+}
+
+.comment_text_area{
+  padding: 20px;
+  width: 20%;
+  height: 100px;
+  background-color: white;
+  border-radius: 10px;
+  rows:5;
+  columns:50;
+  
+
+}
+
+.comment-form{
+  padding: 0 50px;
+}
+.comment_section{
+  padding:50px;
 }
 @-webkit-keyframes animatezoom {
   from {
