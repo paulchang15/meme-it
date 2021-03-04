@@ -9,7 +9,6 @@ async function editFormHandler(event) {
     method: "PUT",
     body: JSON.stringify({
       title,
-      // img_url, //do we want to require them to change or reupload the image when editing their post?
     }),
     headers: {
       "Content-Type": "application/json",

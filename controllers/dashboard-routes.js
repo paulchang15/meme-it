@@ -22,6 +22,7 @@ router.get("/", withAuth, async (req, res) => {
           "vote_count",
         ],
       ],
+      order: [["created_at", "DESC"]],
       include: [
         {
           model: Comment,
@@ -64,10 +65,7 @@ router.get("/", withAuth, async (req, res) => {
 router.get("/edit/:id", withAuth, async (req, res) => {
   try {
     console.log(req.body.user_id);
-    const editPosts = await Post.findAll({
-      where: {
-        id: req.params.id,
-      },
+    const editPosts = await Post.findByPk(req.params.id, {
       attributes: [
         "id",
         "title",
@@ -89,10 +87,6 @@ router.get("/edit/:id", withAuth, async (req, res) => {
             "user_id",
             "created_at",
           ],
-          include: {
-            model: User,
-            attributes: ["username"],
-          },
         },
         {
           model: User,
@@ -107,10 +101,10 @@ router.get("/edit/:id", withAuth, async (req, res) => {
       return;
     }
 
-    const posts = await editPosts.map((post) => post.get({ plain: true }));
+    const post = await editPosts.get({ plain: true });
 
     await res.render("edit-post", {
-      posts,
+      post,
       loggedIn: true,
     });
   } catch (err) {

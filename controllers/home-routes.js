@@ -16,6 +16,7 @@ router.get("/", async (req, res) => {
           "vote_count",
         ],
       ],
+      order: [["created_at", "DESC"]],
       include: [
         {
           model: Comment,
@@ -65,107 +66,58 @@ router.get("/login", async (req, res) => {
   }
 });
 
-router.get("/post/:id", (req, res) => {
-  // try {
-  //   const findPost = await Post.findOne({
-  //     where: {
-  //       id: req.params.id,
-  //     },
-  //     attributes: [
-  //       "id",
-  //       "title",
-  //       "created_at",
-  //       [
-  //         sequelize.literal(
-  //           "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-  //         ),
-  //         "vote_count",
-  //       ],
-  //     ],
-  //     include: [
-  //       {
-  //         model: Comment,
-  //         attributes: [
-  //           "id",
-  //           "comment_text",
-  //           "post_id",
-  //           "user_id",
-  //           "created_at",
-  //         ],
-  //         include: {
-  //           model: User,
-  //           attributes: ["username"],
-  //         },
-  //       },
-  //       {
-  //         model: User,
-  //         attributes: ["username"],
-  //       },
-  //       { model: Image, attributes: ["img_url"] },
-  //     ],
-  //   });
-  //   if (findPost.length === 0) {
-  //     res.status(404).json({ message: "No post found!" });
-  //     return;
-  //   }
-  //   const render = async () => {
-  //     f = await render.get({ plain: true });
-  //     await res.render("single-post", {
-  //       post,
-  //       loggedIn: req.session.loggedIn,
-  //     });
-  //   };
-  // } catch (err) {
-  //   console.log(err);
-  //   res.status(500).json(err);
-  // }
-  Post.findOne({
-    where: {
-      id: req.params.id,
-    },
-    attributes: [
-      "id",
-      "title",
-      "created_at",
-      [
-        sequelize.literal(
-          "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-        ),
-        "vote_count",
+router.get("/post/:id", async (req, res) => {
+  try {
+    const findPost = await Post.findOne({
+      where: {
+        id: req.params.id,
+      },
+      attributes: [
+        "id",
+        "title",
+        "created_at",
+        [
+          sequelize.literal(
+            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+          ),
+          "vote_count",
+        ],
       ],
-    ],
-    include: [
-      {
-        model: Comment,
-        attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
-        include: {
+      include: [
+        {
+          model: Comment,
+          attributes: [
+            "id",
+            "comment_text",
+            "post_id",
+            "user_id",
+            "created_at",
+          ],
+          include: {
+            model: User,
+            attributes: ["username"],
+          },
+        },
+        {
           model: User,
           attributes: ["username"],
         },
-      },
-      {
-        model: User,
-        attributes: ["username"],
-      },
-    ],
-  })
-    .then((dbPostData) => {
-      if (!dbPostData) {
-        res.status(404).json({ message: "No post found with this id" });
-        return;
-      }
-
-      const post = dbPostData.get({ plain: true });
-
-      res.render("single-post", {
-        post,
-        loggedIn: req.session.loggedIn,
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json(err);
+        { model: Image, attributes: ["img_url"] },
+      ],
     });
+    if (!findPost) {
+      res.status(404).json({ message: "No post found!" });
+      return;
+    }
+    const post = await findPost.get({ plain: true });
+    await res.render("single-post", {
+      post,
+      loggedIn: req.session.loggedIn,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
 
 module.exports = router;

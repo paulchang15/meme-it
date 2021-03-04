@@ -1,15 +1,17 @@
 <div class="container">
     <div class="col l12 m8 s6 offset-s3"><span class="flow-text"></span>
         <div class="card col s6">
+            {{!-- {{posts as |post|}} --}}
             <article>
                 <h2>
                     Edit Meme
                 </h2>
+                {{> post-info post }}
                 <form class="edit-post-form">
                     <div>
-                        <input name="post-title" type="text" value="{{post.title}}" />
-                        {{!-- We dont need format_url on this now right? Will this actually be post.content? --}}
-                        <span>({{post.img_url}})</span>
+                        <span>Title</span>
+                        <input placeholder="Meme Title" name="post-title" type="text" value="{{post.title}}" />
+
                     </div>
                     <div>
                         {{post.vote_count}} {{format_plural "point" post.vote_count}} by you on
@@ -18,11 +20,13 @@
                         <a href="/api/posts/{{post.id}}">{{post.comments.length}}
                             {{format_plural "comment" post.comments.length}}</a>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit">Save post</button>
-                    <button type="button" class="btn waves-effect waves-light delete-post-btn">Delete post</button>
+                    <button class="btn waves-effect waves-light" type="submit"><i
+                            class="material-icons">save</i>Save</button>
+                    <button type="button" class="btn waves-effect waves-light delete-post-btn"><i
+                            class="material-icons">delete</i></button>
                 </form>
             </article>
-            <form class="comment-form">
+            {{!-- <form class="comment-form">
                 <div>
                     <textarea name="comment-body"></textarea>
                 </div>
@@ -30,7 +34,7 @@
                 <div>
                     <button class="btn waves-effect waves-light" type="submit">add comment</button>
                 </div>
-            </form>
+            </form> --}}
 
             {{> comments post.comments }}
         </div>
