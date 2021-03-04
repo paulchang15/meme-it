@@ -1,5 +1,5 @@
 body {
-  background: skyblue;
+  background: rgb(225, 240, 245);
 }
 
 .brand-logo {
@@ -11,6 +11,9 @@ body {
   align-items: flex-start;
 }
 
+.blue-theme {
+  background-color: #34c2e6;
+}
 ul {
   list-style-type: none;
 }
@@ -61,7 +64,8 @@ ul {
 /* adding padding to the nav */
 .nav-wrapper {
   /* border-spacing: 2px; */
-  background-color: #0574f9;
+  background-color: #34c2e6;
+  text-decoration-color: rgb(219, 86, 86);
 }
 /* nav .brand-logo {
   padding: 0 15px;
@@ -111,7 +115,7 @@ ul {
   padding: 20px;
   width: 20%;
   height: 100px;
-  background-color: white;
+  background-color: rgb(255, 254, 254);
   border-radius: 10px;
 }
 
