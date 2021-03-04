@@ -1,5 +1,24 @@
+body{
+  background: skyblue
+}
 
+.brand-logo{
+  padding: 0 15px;
+}
+.container{
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  
+}
 
+ul{
+  list-style-type: none;
+}
+
+li{
+margin: 10px;
+}
 /* The Close Button */
 .close {
   /* Position it in the top right corner outside of the modal */
@@ -43,16 +62,28 @@
 /* adding padding to the nav */
 .nav-wrapper {
   border-spacing: 2px;
+  background-color: #0574f9;
+}
+nav .brand-logo{
+  padding: 0 15px;
 }
 .post{
-  /* background-color: #e0e0e0; */
-  width: 375px;
- 
-  
+  background-color: white;
+  width: auto;
+  border-radius: 25px;
+
+
+}
+
+
+
+.post-list{
+  list-style-type: none;
+  border-radius: 25px;
 }
 
 .meme-img{
-  width: 275px;
+  width: 500px;
   height: auto;
   Margin: 0px 30px;
 }
@@ -68,7 +99,11 @@
   padding-bottom: 15px;
   Margin: 0px 30px;
 }
+.item{
 
+  display: flex;
+  flex-wrap: wrap;
+}
 @-webkit-keyframes animatezoom {
   from {
     -webkit-transform: scale(0);
