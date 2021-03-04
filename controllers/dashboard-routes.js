@@ -107,10 +107,10 @@ router.get("/edit/:id", withAuth, async (req, res) => {
       return;
     }
 
-    const posts = await editPosts.map((post) => post.get({ plain: true }));
+    const post = await editPosts.get({ plain: true });
 
     await res.render("edit-post", {
-      posts,
+      post,
       loggedIn: true,
     });
   } catch (err) {

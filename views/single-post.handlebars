@@ -1,26 +1,25 @@
 {{!-- <div class="container">
     <div class="col l12 m8 s6 offset-s3"><span class="flow-text"></span>
         <div class="card col s6"> --}}
-            {{> post-info post }}
+{{> post-info post }}
 
-            <div>
-                <img class="meme-img materialboxed z-depth-4" src="{{{image.img_url}}}">
-            </div>
-            {{#if loggedIn }}
-            <form class="comment-form">
-                <div>
-                    <textarea name="comment-body"></textarea>
-                </div>
+<div>
+    <img class="meme-img materialboxed z-depth-4" src="{{{image.img_url}}}">
+</div>
+{{#if loggedIn }}
+<form class="comment-form">
+    <div>
+        <textarea name="comment-body"></textarea>
+    </div>
 
-                <div>
-                    <button type="submit">add comment</button>
-                    <a class="waves-effect waves-light btn"><i
-                            class="material-icons upvote-btn">keyboard_arrow_up</i></a>
-                </div>
-            </form>
-            {{/if}}
-            {{> comments post.comments }}
-            {{!--
+    <div>
+        <button class="btn waves-effect waves-light" type="submit">add comment</button>
+        <a class="waves-effect waves-light btn"><i class="material-icons upvote-btn">keyboard_arrow_up</i></a>
+    </div>
+</form>
+{{/if}}
+{{> comments post.comments }}
+{{!--
         </div>
     </div>
 </div> --}}
