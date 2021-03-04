@@ -35,11 +35,11 @@
         <!-- Button to open the modal login form -->
 
         {{#if loggedIn }}
-        <li><a href="/dashboard"><i class="material-icons">dashboard</i>Dashboard</a></li>
+        <li><a href="/dashboard">Dashboard</a></li>
         </li>
         <li><a id="logout" href="/"><i class="material-icons">exit_to_app</i></a></li>
         {{else}}
-        <li><a href="/login">login</a></li>
+        <li><a href="/login">Login</a></li>
         {{/if}}
       </ul>
     </div>
@@ -47,9 +47,9 @@
   <ul class="sidenav" id="mobile-demo">
     {{#if loggedIn }}
     <li><a href="/dashboard"><i class="material-icons">dashboard</i>Dashboard</a></li>
-    <li><a id="logout" class="btn waves-effect waves-light"><i class="material-icons">exit_to_app</i>logout</a></li>
+    <li><a id="logout"><i class="material-icons">exit_to_app</i>Logout</a></li>
     {{else}}
-    <li><a href="/login">login</a></li>
+    <li><a href="/login">Login</a></li>
     {{/if}}
   </ul>
 
