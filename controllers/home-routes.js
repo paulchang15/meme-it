@@ -40,8 +40,8 @@ router.get("/", async (req, res) => {
     });
 
     const posts = await findPosts.map((post) => post.get({ plain: true }));
-    console.log("-------findPosts------------");
-    console.log(findPosts[0]);
+    console.log("-----------------homepage posts---------------------");
+    console.log(posts);
     await res.render("homepage", {
       posts,
       loggedIn: req.session.loggedIn,
