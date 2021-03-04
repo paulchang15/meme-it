@@ -70,24 +70,18 @@ ul {
   background-color: white;
   width: auto;
   border-radius: 15px;
-
-
 }
 
-.post-content{
-
+.post-content {
   align-content: center;
 }
 
-
-
-
-.post-list{
+.post-list {
   list-style-type: none;
   border-radius: 25px;
 }
 
-.card_image{
+.card_image {
   width: 500px;
   height: auto;
   margin: 0px 30px;
@@ -109,25 +103,23 @@ ul {
   flex-wrap: wrap;
 }
 
-.comment_button{
-font-size: 20px;
+.comment_button {
+  font-size: 20px;
 }
 
-.comment_text_area{
+.comment_text_area {
   padding: 20px;
   width: 20%;
   height: 100px;
   background-color: white;
   border-radius: 10px;
-  
-
 }
 
-.comment-form{
+.comment-form {
   padding: 0 50px;
 }
-.comment_section{
-  padding:50px;
+.comment_section {
+  padding: 50px;
 }
 @-webkit-keyframes animatezoom {
   from {

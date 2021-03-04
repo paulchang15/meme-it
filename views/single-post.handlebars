@@ -1,14 +1,5 @@
 <div class="container">
     <div class="col l12 m8 s6 offset-s3"><span class="flow-text"></span>
-<<<<<<< HEAD
-        <div class="card col s6"> --}}
-{{> post-info post }}
-{{#if loggedIn }}
-<form class="comment-form">
-    <div>
-        <textarea name="comment-body"></textarea>
-    </div>
-=======
         <div class="card col s6">
             {{> post-info post }}
             {{#if loggedIn }}
@@ -19,18 +10,17 @@
 
                 <div>
                     <button class="btn waves-effect waves-light" type="submit">add comment</button>
->>>>>>> 7e53ac5524b41d16bf2c0c5996ec275e99648502
 
                 </div>
             </form>
             {{/if}}
-                        <div class="comment_section">
+            <div class="comment_section">
 
-            {{> comments post.comments }}
+                {{> comments post.comments }}
+            </div>
         </div>
     </div>
-</div>
-{{#if loggedIn }}
-<script src="/javascript/comment.js"></script>
-<script src="/javascript/upvote.js"></script>
-{{/if}}
+    {{#if loggedIn }}
+    <script src="/javascript/comment.js"></script>
+    <script src="/javascript/upvote.js"></script>
+    {{/if}}
