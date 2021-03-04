@@ -5,7 +5,7 @@
             {{#if loggedIn }}
             <form class="comment-form">
                 <div>
-                    <textarea name="comment-body"></textarea>
+                    <textarea name="comment-body" class="comment_text_area" rows="5" cols="50"></textarea>
                 </div>
 
                 <div>
@@ -14,8 +14,9 @@
                 </div>
             </form>
             {{/if}}
-            {{> comments post.comments }}
+                        <div class="comment_section">
 
+            {{> comments post.comments }}
         </div>
     </div>
 </div>
