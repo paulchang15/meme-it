@@ -1,5 +1,6 @@
-{{!-- <div class="container">
+<div class="container">
     <div class="col l12 m8 s6 offset-s3"><span class="flow-text"></span>
+<<<<<<< HEAD
         <div class="card col s6"> --}}
 {{> post-info post }}
 {{#if loggedIn }}
@@ -7,18 +8,28 @@
     <div>
         <textarea name="comment-body"></textarea>
     </div>
+=======
+        <div class="card col s6">
+            {{> post-info post }}
+            {{#if loggedIn }}
+            <form class="comment-form">
+                <div>
+                    <textarea name="comment-body" class="comment_text_area" rows="5" cols="50"></textarea>
+                </div>
 
-    <div>
-        <button class="btn waves-effect waves-light" type="submit">add comment</button>
-        <a class="waves-effect waves-light btn"><i class="material-icons upvote-btn">keyboard_arrow_up</i></a>
-    </div>
-</form>
-{{/if}}
-{{> comments post.comments }}
-{{!--
+                <div>
+                    <button class="btn waves-effect waves-light" type="submit">add comment</button>
+>>>>>>> 7e53ac5524b41d16bf2c0c5996ec275e99648502
+
+                </div>
+            </form>
+            {{/if}}
+                        <div class="comment_section">
+
+            {{> comments post.comments }}
         </div>
     </div>
-</div> --}}
+</div>
 {{#if loggedIn }}
 <script src="/javascript/comment.js"></script>
 <script src="/javascript/upvote.js"></script>

@@ -20,8 +20,10 @@
                         <a href="/api/posts/{{post.id}}">{{post.comments.length}}
                             {{format_plural "comment" post.comments.length}}</a>
                     </div>
-                    <button class="btn waves-effect waves-light" type="submit">Save post</button>
-                    <button type="button" class="btn waves-effect waves-light delete-post-btn">Delete post</button>
+                    <button class="btn waves-effect waves-light" type="submit"><i
+                            class="material-icons">save</i>Save</button>
+                    <button type="button" class="btn waves-effect waves-light delete-post-btn"><i
+                            class="material-icons">delete</i></button>
                 </form>
             </article>
             {{!-- <form class="comment-form">
@@ -33,7 +35,6 @@
                     <button class="btn waves-effect waves-light" type="submit">add comment</button>
                 </div>
             </form> --}}
-
 
             {{> comments post.comments }}
         </div>

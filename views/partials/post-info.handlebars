@@ -3,15 +3,30 @@
         <div class="col l8 m10 s12">
             <article class="post">
                 <div class="title">
+<<<<<<< HEAD
                     <a href="/dashboard/edit/{{id}}" target="_blank">{{title}}</a>
                     <img id="image-id" src="/image{{img_url}}">
+=======
+                    <a href="/dashboard/edit/{{id}}">{{title}}</a>
+
+                </div>
+
+                <div>
+                    <img class= "card_image z-depth-5"src="{{{image.img_url}}}">
+>>>>>>> 7e53ac5524b41d16bf2c0c5996ec275e99648502
                 </div>
                 <div class="meta">
-
+                    <a class="waves-effect waves-light btn"><i class="upvote-btn tiny material-icons">thumb_up</i></a>
                     {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
                     {{format_date created_at}}
                     |
+<<<<<<< HEAD
                     <a href="/api/posts/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+=======
+                    <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment"
+                        comments.length}}</a>
+
+>>>>>>> 7e53ac5524b41d16bf2c0c5996ec275e99648502
                 </div>
             </article>
         </div>

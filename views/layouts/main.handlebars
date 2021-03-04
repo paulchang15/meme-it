@@ -18,6 +18,12 @@
   </style>
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.querySelectorAll('.sidenav');
+      var instances = M.Sidenav.init(elems);
+    });
+  </script>
 </head>
 
 <header>
@@ -26,23 +32,34 @@
       <a href="/" class="brand-logo">iMemeit</a>
       <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
       <ul class="right hide-on-med-and-down">
+<<<<<<< HEAD
         <a class="btn waves-effect waves-light" href="/login">Login/Signup</a>
         {{#if loggedIn }}
         <a class="btn waves-effect waves-light" href="/dashboard">dashboard</a>
         <a id="logout" href="/" class="btn waves-effect waves-light">logout</a>
+=======
+        <!-- Button to open the modal login form -->
+>>>>>>> 7e53ac5524b41d16bf2c0c5996ec275e99648502
 
+        {{#if loggedIn }}
+        <li><a href="/dashboard"><i class="material-icons">dashboard</i>Dashboard</a></li>
+        </li>
+        <li><a id="logout" href="/"><i class="material-icons">exit_to_app</i></a></li>
+        {{else}}
+        <li><a href="/login">login</a></li>
         {{/if}}
       </ul>
     </div>
   </nav>
-  {{!-- <ul class="sidenav" id="mobile-demo">
+  <ul class="sidenav" id="mobile-demo">
     {{#if loggedIn }}
-    <a href="/dashboard">dashboard</a>
-    <button id="logout" class="btn waves-effect waves-light">logout</button>
+    <li><a href="/dashboard"><i class="material-icons">dashboard</i>Dashboard</a></li>
+    <li><a id="logout" class="btn waves-effect waves-light"><i class="material-icons">exit_to_app</i>logout</a></li>
     {{else}}
-    <a href="/">login</a>
+    <li><a href="/login">login</a></li>
     {{/if}}
-  </ul> --}}
+  </ul>
+
 </header>
 
 <body>
@@ -55,6 +72,7 @@
 <script src="/javascript/image.js"></script> --}}
 {{#if loggedIn}}
 <script src="/javascript/logout.js"></script>
+<script src="/javascript/upvote.js"></script>
 {{/if}}
 
 

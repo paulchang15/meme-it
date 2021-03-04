@@ -1,24 +1,23 @@
-body{
-  background: skyblue
+body {
+  background: skyblue;
 }
 
-.brand-logo{
+.brand-logo {
   padding: 0 15px;
 }
-.container{
+.container {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: flex-start;
-  
 }
 
-ul{
+ul {
   list-style-type: none;
 }
 
-li{
-margin: 10px;
-}
+/* li {
+  margin: 10px;
+} */
 /* The Close Button */
 .close {
   /* Position it in the top right corner outside of the modal */
@@ -61,19 +60,25 @@ margin: 10px;
 
 /* adding padding to the nav */
 .nav-wrapper {
-  border-spacing: 2px;
+  /* border-spacing: 2px; */
   background-color: #0574f9;
 }
-nav .brand-logo{
+/* nav .brand-logo {
   padding: 0 15px;
-}
-.post{
+} */
+.post {
   background-color: white;
   width: auto;
-  border-radius: 25px;
+  border-radius: 15px;
 
 
 }
+
+.post-content{
+
+  align-content: center;
+}
+
 
 
 
@@ -82,27 +87,47 @@ nav .brand-logo{
   border-radius: 25px;
 }
 
-.meme-img{
+.card_image{
   width: 500px;
   height: auto;
-  Margin: 0px 30px;
+  margin: 0px 30px;
 }
 
-.meta{
+.meta {
   font-size: medium;
   padding-top: 15px;
-  Margin: 0px 30px;
+  margin: 0px 30px;
 }
 
-.title{
+.title {
   font-size: 30px;
   padding-bottom: 15px;
-  Margin: 0px 30px;
+  margin: 0px 30px;
 }
-.item{
-
+.item {
   display: flex;
   flex-wrap: wrap;
+}
+
+.comment_button{
+font-size: 20px;
+}
+
+.comment_text_area{
+  padding: 20px;
+  width: 20%;
+  height: 100px;
+  background-color: white;
+  border-radius: 10px;
+  
+
+}
+
+.comment-form{
+  padding: 0 50px;
+}
+.comment_section{
+  padding:50px;
 }
 @-webkit-keyframes animatezoom {
   from {
