@@ -1,6 +1,6 @@
-<div class="container">
+{{!-- <div class="container">
     <div class="col l12 m8 s6 offset-s3"><span class="flow-text"></span>
-        <div class="card col l8 m10 s12">
+        <div class="card col l8 m10 s12"> --}}
             <section>
                 <h2>Post a Meme</h2>
 
@@ -19,7 +19,7 @@
                 </form>
             </section>
 
-            {{#if posts.length}}
+            {{!-- {{#if posts.length}} --}}
             <section>
                 <h2> Your Memes</h2>
                 <ol>
@@ -27,14 +27,15 @@
                     <li>
                         {{> post-info post }}
                         <a href="/dashboard/edit/{{post.id}}" class="waves-effect waves-light btn"><i
-                                class="material-icons">edit</i></a>
+                                class="material-icons edit-link">edit</i></a>
                         <a class="waves-effect waves-light btn"><i class="material-icons">keyboard_arrow_up</i></a>
                     </li>
                     {{/each}}
                 </ol>
             </section>
-            {{/if}}
+            {{!-- {{/if}} --}}
+            {{!--
         </div>
     </div>
-</div>
+</div> --}}
 <script src="/javascript/add-post.js"></script>
