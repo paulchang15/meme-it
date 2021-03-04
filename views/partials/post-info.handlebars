@@ -8,14 +8,15 @@
                 </div>
 
                 <div>
-                    <img class= "meme-img materialboxed z-depth-4"src="{{{image.img_url}}}">
+                    <img class="meme-img materialboxed z-depth-4" src="{{{image.img_url}}}">
                 </div>
                 <div class="meta">
 
-                    <img src="{{{img_url}}}">{{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
+                    {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
                     {{format_date created_at}}
                     |
-                    <a href=" /api/posts/{{id}}">{{comments.length}} {{format_plural "comment" comments.length}}</a>
+                    <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment"
+                        comments.length}}</a>
                 </div>
             </article>
         </div>
