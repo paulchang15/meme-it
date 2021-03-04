@@ -4,17 +4,15 @@ const { Post, User, Comment, Image } = require("../models");
 const withAuth = require("../utils/auth");
 
 //make sure to add withAuth to all the routes after we test them
-router.get("/", async (req, res) => {
+router.get("/", withAuth, async (req, res) => {
   try {
     // console.log(req.body.user_id);
     const allPosts = await Post.findAll({
       where: {
-        // user_id: req.session.id, // change back to req.session.user_id after session set up
-        user_id: 1,
+        user_id: req.session.id,
       },
       attributes: [
         "id",
-        "content",
         "title",
         "created_at",
         [
@@ -46,30 +44,32 @@ router.get("/", async (req, res) => {
         { model: Image, attributes: ["img_url"] },
       ],
     });
+    console.log("--------------------------------------");
+    console.log(allPosts);
     const posts = await allPosts.map((post) => post.get({ plain: true }));
 
     if (!allPosts) {
       res.status(404).json({ message: "No posts found!" });
       return;
     }
+    console.log("--------------------------------------");
     console.log(posts);
-    await res.render("dashboard", { posts });
+    await res.render("dashboard", { posts, loggedIn: true });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
 
-router.get("/edit/:id", async (req, res) => {
+router.get("/edit/:id", withAuth, async (req, res) => {
   try {
-    // console.log(req.body.user_id);
+    console.log(req.body.user_id);
     const editPosts = await Post.findAll({
       where: {
-        id: req.params.id
+        id: req.params.id,
       },
       attributes: [
         "id",
-        "content",
         "title",
         "created_at",
         [
@@ -98,11 +98,9 @@ router.get("/edit/:id", async (req, res) => {
           model: User,
           attributes: ["username"],
         },
-        { model: Image, 
-          attributes: ["img_url"] },
+        { model: Image, attributes: ["img_url"] },
       ],
     });
-    
 
     if (!editPosts) {
       res.status(404).json({ message: "No posts found!" });
@@ -111,24 +109,14 @@ router.get("/edit/:id", async (req, res) => {
 
     const posts = await editPosts.map((post) => post.get({ plain: true }));
 
-    await res.render("edit-post", { 
+    await res.render("edit-post", {
       posts,
-      loggedIn: true
+      loggedIn: true,
     });
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
-    });
-
-//I dont think we need this actually since the post-routes has this route already with the
-// router.post("/", async (req, res) => {
-//   const post = await Post.create({
-//     title: req.body.title,
-//     content: req.body.content,
-//     user_id: req.session.user_id, // change back to req.session.user_id
-//   });
-//   res.json(post);
-// });
+});
 
 module.exports = router;

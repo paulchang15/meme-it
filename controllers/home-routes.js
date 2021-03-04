@@ -1,14 +1,12 @@
 const router = require("express").Router();
 const sequelize = require("../config/connection");
-const { Post, User, Comment } = require("../models");
+const { Post, User, Comment, Image } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
-    // console.log(req.session);
     const findPosts = await Post.findAll({
       attributes: [
         "id",
-        "content",
         "title",
         "created_at",
         [
@@ -37,14 +35,16 @@ router.get("/", async (req, res) => {
           model: User,
           attributes: ["username"],
         },
+        { model: Image, attributes: ["img_url"] },
       ],
     });
 
     const posts = await findPosts.map((post) => post.get({ plain: true }));
+    console.log("-------findPosts------------");
     console.log(findPosts[0]);
     await res.render("homepage", {
       posts,
-      // loggedIn: req.session.loggedIn, // uncomment this back when session is active
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     console.log(err);
@@ -54,10 +54,10 @@ router.get("/", async (req, res) => {
 
 router.get("/login", async (req, res) => {
   try {
-    // if (req.session.loggedIn) {
-    //   res.redirect("/");
-    //   return;
-    // }
+    if (req.session.loggedIn) {
+      res.redirect("/");
+      return;
+    }
 
     res.render("login");
   } catch (err) {
@@ -73,7 +73,6 @@ router.get("/post/:id", async (req, res) => {
       },
       attributes: [
         "id",
-        "content",
         "title",
         "created_at",
         [
@@ -112,7 +111,7 @@ router.get("/post/:id", async (req, res) => {
 
     await res.render("single-post", {
       posts,
-      // loggedIn: req.session.loggedIn,
+      loggedIn: req.session.loggedIn,
     });
   } catch (err) {
     console.log(err);

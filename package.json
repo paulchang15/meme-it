@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/paulchang15/meme-it#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "bcrypt": "^5.0.0",
     "connect-session-sequelize": "^7.1.1",
     "dotenv": "^8.2.0",

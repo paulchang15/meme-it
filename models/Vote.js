@@ -13,7 +13,7 @@ Vote.init(
     // incase foreign key err, add onDelete cascade in post_id and user_id again
     user_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+
       references: {
         model: "user",
         key: "id",
@@ -22,7 +22,7 @@ Vote.init(
     },
     post_id: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+
       references: {
         model: "post",
         key: "id",

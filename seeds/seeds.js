@@ -1,4 +1,4 @@
-const { User, Post, Image, Comment } = require("../models");
+const { User, Post, Image, Comment, Vote } = require("../models");
 const sequelize = require("../config/connection");
 const userdata = [
   {
@@ -21,9 +21,18 @@ const userdata = [
 const postdata = [
   {
     title: "Donec posuere metus vitae ipsum.",
-    content: "Yoda Meme",
     user_id: 1,
   },
+  // {
+  //   title: "Donec posuere metus vitae ipsum.",
+  //   content: "Yoda Meme",
+  //   user_id: 2,
+  // },
+  // {
+  //   title: "Donec posuere metus vitae ipsum.",
+  //   content: "Yoda Meme",
+  //   user_id: 3,
+  // },
 ];
 
 const imgdata = [
@@ -42,6 +51,13 @@ const commentData = [
     post_id: 1,
   },
 ];
+
+const voteData = [
+  {
+    user_id: 1,
+    post_id: 1,
+  },
+];
 const seedUsers = async () => {
   await User.bulkCreate(userdata, { individualHooks: true });
 };
@@ -53,8 +69,13 @@ const seedPosts = async () => {
 const seedComments = async () => {
   await Comment.bulkCreate(commentData);
 };
+
 const seedImg = async () => {
   await Image.bulkCreate(imgdata);
+};
+
+const seedVote = async () => {
+  await Vote.bulkCreate(voteData);
 };
 
 const seedAll = async () => {
@@ -62,6 +83,7 @@ const seedAll = async () => {
   await seedPosts();
   await seedComments();
   await seedImg();
+  await seedVote();
 };
 
 seedAll();

@@ -2,14 +2,13 @@ const router = require("express").Router();
 const sequelize = require("../../config/connection");
 const { Post, User, Comment, Vote, Image } = require("../../models");
 const withAuth = require("../../utils/auth");
-const { fileUpload, urlUpload } = require("../../utils/imgur");
+const axios = require("axios");
 
 router.get("/", async (req, res) => {
   try {
     const post = await Post.findAll({
       attributes: [
         "id",
-        "content",
         "title",
         "created_at",
         [
@@ -60,7 +59,7 @@ router.get("/:id", async (req, res) => {
       where: {
         id: req.params.id,
       },
-      attributes: ["id", "content", "title", "created_at"],
+      attributes: ["id", "title", "created_at"],
       include: [
         {
           model: Comment,
@@ -105,7 +104,7 @@ router.get("/:id", async (req, res) => {
 //   }
 // });
 
-router.put("/upvote", async (req, res) => {
+router.put("/upvote", withAuth, async (req, res) => {
   try {
     const upVote = await Post.upvote(
       {
@@ -121,27 +120,36 @@ router.put("/upvote", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/", withAuth, async (req, res) => {
   try {
-    // const newPost = await fetch(`https://api.imgur.com/3/image`, {
-    //   method: "POST",
-    //   body: { image, type: "file" },
-    //   headers: {
-    //     Authorization: "Client-ID ebe2f73bc0d1a0d",
-    //   },
-    // });
+    // console.log(typeof req.body.img_url);
+
+    const newPost = await axios.post(
+      `https://api.imgur.com/3/image`,
+      { image: req.body.img_url },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Client-ID ebe2f73bc0d1a0d",
+        },
+      }
+    );
+    console.log(newPost.data);
     const post = await Post.create({
       title: req.body.title,
-      content: req.body.content,
-      user_id: req.session.user_id, // add back req.session.user_id when login works
-    });
-    const image = await Image.create({
-      post_id: post.post_id,
+
       user_id: req.session.user_id,
-      img_url: req.body.img_url,
+    });
+    console.log("The post is --------------------------");
+    console.log(JSON.stringify(post));
+    const image = await Image.create({
+      post_id: post.id,
+      user_id: req.session.user_id,
+      img_url: newPost.data.data.link,
     });
 
-    res.json({ post, image });
+    // res.send(newPost.data.link);
+    res.json(image);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -150,11 +158,7 @@ router.post("/", async (req, res) => {
 
 router.get("/image", async (req, res) => {
   try {
-    const image = await Image.findOne({
-      where: {
-        id: req.params.id,
-      },
-    });
+    const image = await Image.findOne({});
     if (!image) {
       res.status(404).json({ message: "No image found with this id " });
       return;
@@ -163,7 +167,7 @@ router.get("/image", async (req, res) => {
   } catch (err) {}
 });
 
-router.put("/:id", async (req, res) => {
+router.put("/:id", withAuth, async (req, res) => {
   try {
     const upDate = await Post.update(
       {
@@ -186,7 +190,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", withAuth, async (req, res) => {
   try {
     const deletePost = await Post.destroy({
       where: {

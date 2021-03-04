@@ -50,8 +50,20 @@
   text-align: center;
 }
 
+.login {
+  margin: 0 auto;
+  max-width: 400px;
+  width: 90%;
+  height: 400px;
+}
+
+.card {
+  padding: 20px;
+}
+
 /* adding padding to the nav */
 .nav-wrapper {
+  border-spacing: 2px;
 }
 
 @-webkit-keyframes animatezoom {
@@ -69,5 +81,27 @@
   }
   to {
     transform: scale(1);
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .container-login {
+    width: 85%;
+  }
+}
+@media only screen and (min-width: 993px) {
+  .container-login {
+    width: 70%;
+  }
+}
+
+@media only screen and (min-width: 601px) {
+  .container {
+    width: 85%;
+  }
+}
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 70%;
   }
 }

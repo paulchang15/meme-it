@@ -9,6 +9,13 @@
   <link type="text/css" rel="stylesheet" href="css/materialize.min.css" media="screen,projection" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
   <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Crimson+Pro">
+  <style>
+    body {
+      font-family: 'Crimson Pro', serif;
+      font-size: 42px;
+    }
+  </style>
   <!--Let browser know website is optimized for mobile-->
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 </head>
@@ -21,24 +28,23 @@
       <ul class="right hide-on-med-and-down">
         <!-- Button to open the modal login form -->
         <a class="btn waves-effect waves-light" href="/login">Login/Signup</a>
-        {{!-- {{#if loggedIn }} --}}
+        {{#if loggedIn }}
         <a class="btn waves-effect waves-light" href="/dashboard">dashboard</a>
         <a id="logout" href="/" class="btn waves-effect waves-light">logout</a>
-        {{!-- {{else}} --}}
-
-
-        {{!-- {{/if}} --}}
+        {{else}}
+        <a href="/login">login</a>
+        {{/if}}
       </ul>
     </div>
   </nav>
-  <ul class="sidenav" id="mobile-demo">
-    {{!-- {{#if loggedIn }} --}}
+  {{!-- <ul class="sidenav" id="mobile-demo">
+    {{#if loggedIn }}
     <a href="/dashboard">dashboard</a>
     <button id="logout" class="btn waves-effect waves-light">logout</button>
-    {{!-- {{else}} --}}
+    {{else}}
     <a href="/">login</a>
-    {{!-- {{/if}} --}}
-  </ul>
+    {{/if}}
+  </ul> --}}
 </header>
 
 <body>
@@ -47,9 +53,12 @@
 
 <!--JavaScript at end of body for optimized loading-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-{{!-- {{#if loggedIn}} --}}
+{{!--
+<script src="/javascript/image.js"></script> --}}
+{{#if loggedIn}}
 <script src="/javascript/logout.js"></script>
-<script src="/javascript/login.js"></script>
-{{!-- {{/if}} --}}
+{{/if}}
+
+
 
 </html>
