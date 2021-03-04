@@ -11,12 +11,13 @@
                     <img class="meme-img z-depth-5" src="{{{image.img_url}}}">
                 </div>
                 <div class="meta">
-
+                    <a class="waves-effect waves-light btn"><i class="upvote-btn tiny material-icons">thumb_up</i></a>
                     {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
                     {{format_date created_at}}
                     |
                     <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment"
                         comments.length}}</a>
+
                 </div>
             </article>
         </div>
