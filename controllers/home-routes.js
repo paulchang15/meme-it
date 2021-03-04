@@ -4,7 +4,6 @@ const { Post, User, Comment, Image } = require("../models");
 
 router.get("/", async (req, res) => {
   try {
-    console.log(req.session);
     const findPosts = await Post.findAll({
       attributes: [
         "id",
@@ -41,6 +40,7 @@ router.get("/", async (req, res) => {
     });
 
     const posts = await findPosts.map((post) => post.get({ plain: true }));
+    console.log("-------findPosts------------");
     console.log(findPosts[0]);
     await res.render("homepage", {
       posts,

@@ -59,7 +59,7 @@ router.get("/:id", async (req, res) => {
       where: {
         id: req.params.id,
       },
-      attributes: ["id", "content", "title", "created_at"],
+      attributes: ["id", "title", "created_at"],
       include: [
         {
           model: Comment,
@@ -122,7 +122,7 @@ router.put("/upvote", withAuth, async (req, res) => {
 
 router.post("/", withAuth, async (req, res) => {
   try {
-    console.log(typeof req.body.img_url);
+    // console.log(typeof req.body.img_url);
 
     const newPost = await axios.post(
       `https://api.imgur.com/3/image`,
@@ -140,8 +140,10 @@ router.post("/", withAuth, async (req, res) => {
 
       user_id: req.session.user_id,
     });
+    console.log("The post is --------------------------");
+    console.log(JSON.stringify(post));
     const image = await Image.create({
-      post_id: req.body.post_id,
+      post_id: post.id,
       user_id: req.session.user_id,
       img_url: newPost.data.data.link,
     });
@@ -156,7 +158,7 @@ router.post("/", withAuth, async (req, res) => {
 
 router.get("/image", async (req, res) => {
   try {
-    const image = await Image.findAll({});
+    const image = await Image.findOne({});
     if (!image) {
       res.status(404).json({ message: "No image found with this id " });
       return;
