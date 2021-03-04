@@ -3,15 +3,15 @@
         <div class="col l3 m10 s12">
             <article class="post">
                 <div class="title">
-                    <a href="/dashboard/edit/{{id}}">{{title}}</a>
+                    <a href="/dashboard/edit/{{id}}" class="black-text">{{title}}</a>
 
                 </div>
 
                 <div>
-                    <img class= "card_image z-depth-5"src="{{{image.img_url}}}">
+                    <img class="card_image z-depth-1" src="{{{image.img_url}}}">
                 </div>
                 <div class="meta">
-                    <a class="waves-effect waves-light btn"><i class="upvote-btn tiny material-icons">thumb_up</i></a>
+                    <a class="waves-effect blue-theme btn"><i class="upvote-btn tiny material-icons">thumb_up</i></a>
                     {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
                     {{format_date created_at}}
                     |
