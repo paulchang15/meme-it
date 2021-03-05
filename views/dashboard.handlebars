@@ -1,6 +1,6 @@
 <div class="container">
     <div class="col l12 m8 s6 offset-s3 post-content"><span class="flow-text"></span>
-        <div class="card col l8 m10 s12 center-align">
+        <div class="card col l8 m10 s12">
             <section>
                 <h2>Post a Meme</h2>
 
@@ -15,7 +15,7 @@
                         <input placeholder="image URL" id="url" type="text" class="validate">
                     </div>
 
-                    <button id="image-submit" type="submit" class="btn">Post</button>
+                    <button id="image-submit" type="submit" class="btn blue-theme">Post</button>
                 </form>
             </section>
 
@@ -26,9 +26,8 @@
                     {{#each posts as |post|}}
                     <li>
                         {{> post-info post }}
-                        <a href="/dashboard/edit/{{post.id}}" class="waves-effect waves-light btn"><i
-                                class="material-icons edit-link">edit</i></a>
-
+                        <a href="/dashboard/edit/{{post.id}}" class="waves-effect blue-theme btn"><i
+                                class="material-icons blue-theme edit-link">edit</i></a>
                     </li>
                     {{/each}}
                 </ol>
@@ -39,3 +38,7 @@
     </div>
 </div>
 <script src="/javascript/add-post.js"></script>
+{{#if loggedIn}}
+<script src="/javascript/logout.js"></script>
+<script src="/javascript/upvote.js"></script>
+{{/if}}

@@ -4,18 +4,21 @@
             <div class="card-title title">
                 <a href="/dashboard/edit/{{id}}" class="black-text">{{title}}</a>
             </div>
+            <div>
+                <img class="card_image z-depth-1" src="{{{image.img_url}}}">
+            </div>
 
-            <img class="card_image z-depth-1" src="{{{image.img_url}}}">
 
             <div class="card-content meta">
-                <a class="waves-effect blue-theme btn"><i class="upvote-btn tiny material-icons">thumb_up</i></a>
+                <a class="waves-effect blue-theme btn upvote-btn "><i class="tiny material-icons">thumb_up</i></a>
                 {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
                 {{format_date created_at}}
                 |
-                <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment"
+                <a href="/post/{{id}}" id="user" data-user={{user.id}}>{{comments.length}} {{format_plural "comment"
                     comments.length}}</a>
 
             </div>
+
         </article>
     </div>
 </div>

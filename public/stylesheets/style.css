@@ -14,42 +14,13 @@ body {
 .blue-theme {
   background-color: #34c2e6;
 }
-ul {
+/* ul {
   list-style-type: none;
-}
+} */
 
 /* li {
   margin: 10px;
 } */
-/* The Close Button */
-.close {
-  /* Position it in the top right corner outside of the modal */
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-/* Close button on hover */
-.close:hover,
-.close:focus {
-  color: red;
-  cursor: pointer;
-}
-
-/* Add Zoom Animation */
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s;
-}
-
-/* centering the text seperator */
-.seperator {
-  text-align: center;
-}
-
 .login {
   margin: 0 auto;
   max-width: 400px;
@@ -58,7 +29,7 @@ ul {
 }
 
 .card {
-  padding: 20px;
+  padding: 10px;
 }
 
 /* adding padding to the nav */
@@ -86,16 +57,15 @@ ul {
 }
 
 .card_image {
-  width: 500px;
+  width: 100%;
   height: auto;
-  margin: 0px 30px;
 }
 
-.meta {
+/* .meta {
   font-size: medium;
   padding-top: 15px;
   margin: 0px 30px;
-}
+} */
 
 .title {
   font-size: 30px;

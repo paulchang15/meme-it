@@ -114,16 +114,15 @@ router.get("/:id", async (req, res) => {
 //   }
 // });
 
-router.put("/upvote", withAuth, async (req, res) => {
+router.put("/upvote/", withAuth, async (req, res) => {
   try {
-    const upVote = await Post.upvote(
+    await Post.upvote(
       {
         ...req.body,
         user_id: req.session.user_id,
       },
-      { Vote, Comment, User }
+      { Vote, Comment, User, Image }
     );
-    res.json(upVote);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
