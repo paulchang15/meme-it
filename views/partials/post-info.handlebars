@@ -1,16 +1,14 @@
 <div class="container">
-    <div class="col l8 m6 s12 offset-s3 item"><span class="flow-text"></span>
-        <div class="col l3 m10 s12">
-            <article class="post">
-                <div class="title">
+    <div class="center-align"><span class="flow-text"></span>
+        {{!-- <div class="col m10 s6"> --}}
+            <article class="card post">
+                <div class="card-title title">
                     <a href="/dashboard/edit/{{id}}" class="black-text">{{title}}</a>
-
                 </div>
-
                 <div>
                     <img class="card_image z-depth-1" src="{{{image.img_url}}}">
                 </div>
-                <div class="meta">
+                <div class="card-content meta">
                     <a class="waves-effect blue-theme btn"><i class="upvote-btn tiny material-icons">thumb_up</i></a>
                     {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
                     {{format_date created_at}}
@@ -20,6 +18,11 @@
 
                 </div>
             </article>
-        </div>
+            {{!--
+        </div> --}}
+
+
+
     </div>
+
 </div>
