@@ -5,11 +5,11 @@ body {
 .brand-logo {
   padding: 0 15px;
 }
-.container {
-  display: inline-flex;
+/* .container {
+  display: flex;
   flex-wrap: wrap;
   align-items: flex-start;
-}
+} */
 
 .blue-theme {
   background-color: #34c2e6;
