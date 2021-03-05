@@ -1,16 +1,12 @@
 async function upvoteClickHandler(event) {
   event.preventDefault();
   console.log("clicked!!!!!!!!!");
-  // const id = document.getElementById("user").getAttribute("data-user");
+  const id = event.target.getAttribute("data-post");
   // let postId = document.getElementById("user").getAttribute("href");
   // await postId.split("/post/");
-
-  const id = window.location.toString().split("/")[
-    window.location.toString().split("/").length - 1
-  ];
-  console.log(id);
+  console.log(event.target.getAttribute("data-post"));
   const response = await fetch("/api/posts/upvote", {
-    method: "PUT",
+    method: "POST",
     body: JSON.stringify({
       // user_id: id,
       post_id: id,
@@ -19,7 +15,7 @@ async function upvoteClickHandler(event) {
       "Content-Type": "application/json",
     },
   });
-
+  console.log({ x: response.ok });
   if (response.ok) {
     document.location.reload();
   } else {
@@ -27,6 +23,6 @@ async function upvoteClickHandler(event) {
   }
 }
 
-document
-  .querySelector(".upvote-btn")
-  .addEventListener("click", upvoteClickHandler);
+document.querySelectorAll(".upvote-btn").forEach((element) => {
+  element.addEventListener("click", upvoteClickHandler);
+});

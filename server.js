@@ -20,9 +20,9 @@ app.set("view engine", "handlebars");
 
 const sess = {
   secret: "Super secret secret",
-  cookie: {
-    expires: 10 * 60 * 1000,
-  },
+  // cookie: {
+  //   expires: 10 * 60 * 1000,
+  // },
   resave: false,
   saveUninitialized: true,
   store: new SequelizeStore({

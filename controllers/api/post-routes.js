@@ -114,8 +114,11 @@ router.get("/:id", async (req, res) => {
 //   }
 // });
 
-router.put("/upvote/", withAuth, async (req, res) => {
+router.post("/upvote/", withAuth, async (req, res) => {
   try {
+    // Logic to unvote after voted
+    // find upvote logic,  if upvoted, then decrease upvote by 1
+
     await Post.upvote(
       {
         ...req.body,
@@ -123,6 +126,8 @@ router.put("/upvote/", withAuth, async (req, res) => {
       },
       { Vote, Comment, User, Image }
     );
+
+    res.send("upvoted");
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

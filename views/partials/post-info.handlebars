@@ -10,7 +10,8 @@
 
 
             <div class="card-content meta">
-                <a class="waves-effect blue-theme btn upvote-btn "><i class="tiny material-icons">thumb_up</i></a>
+                <a class="waves-effect blue-theme btn upvote-btn" id="post" data-post={{id}}><i
+                        class="tiny material-icons" data-post={{id}}>thumb_up</i></a>
                 {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
                 {{format_date created_at}}
                 |
