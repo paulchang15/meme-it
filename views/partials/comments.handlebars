@@ -1,6 +1,6 @@
-<div class="comments">
+<ul class="comments collection">
     {{#each this}}
-    <section class="comment">
+    <section class="comment collection-item">
         <div class="meta">
             {{user.username}} on {{format_date created_at}}
         </div>
@@ -9,4 +9,4 @@
         </div>
     </section>
     {{/each}}
-</div>
+</ul>

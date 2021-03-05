@@ -1,28 +1,21 @@
 <div class="container">
-    <div class="center-align"><span class="flow-text"></span>
-        {{!-- <div class="col m10 s6"> --}}
-            <article class="card post">
-                <div class="card-title title">
-                    <a href="/dashboard/edit/{{id}}" class="black-text">{{title}}</a>
-                </div>
-                <div>
-                    <img class="card_image z-depth-1" src="{{{image.img_url}}}">
-                </div>
-                <div class="card-content meta">
-                    <a class="waves-effect blue-theme btn"><i class="upvote-btn tiny material-icons">thumb_up</i></a>
-                    {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
-                    {{format_date created_at}}
-                    |
-                    <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment"
-                        comments.length}}</a>
+    <div class="row center-align"><span class="flow-text"></span>
+        <article class="card post">
+            <div class="card-title title">
+                <a href="/dashboard/edit/{{id}}" class="black-text">{{title}}</a>
+            </div>
 
-                </div>
-            </article>
-            {{!--
-        </div> --}}
+            <img class="card_image z-depth-1" src="{{{image.img_url}}}">
 
+            <div class="card-content meta">
+                <a class="waves-effect blue-theme btn"><i class="upvote-btn tiny material-icons">thumb_up</i></a>
+                {{vote_count}} {{format_plural "point" vote_count}} by {{user.username}} on
+                {{format_date created_at}}
+                |
+                <a href="/post/{{id}}">{{comments.length}} {{format_plural "comment"
+                    comments.length}}</a>
 
-
+            </div>
+        </article>
     </div>
-
 </div>
