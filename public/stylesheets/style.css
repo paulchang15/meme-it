@@ -2,9 +2,9 @@ body {
   background: rgb(225, 240, 245);
 }
 
-.brand-logo {
+/* .brand-logo {
   padding: 0 15px;
-}
+} */
 .container {
   display: inline-flex;
   flex-wrap: wrap;
@@ -124,6 +124,12 @@ ul {
 }
 .comment_section {
   padding: 50px;
+}
+
+.memeit-logo{
+  width: 275px;
+  height: 2.75em;
+  padding: 0 25px;
 }
 @-webkit-keyframes animatezoom {
   from {
