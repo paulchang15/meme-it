@@ -5,11 +5,14 @@ body {
 .brand-logo {
   padding: 0 15px;
 }
-/* .container {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-} */
+.container {
+  width: 620px;
+}
+
+.col {
+  width: 710px;
+  border-radius: 15px;
+}
 
 .blue-theme {
   background-color: #34c2e6;
@@ -113,24 +116,13 @@ body {
   }
 }
 
-@media only screen and (min-width: 601px) {
+@media only screen and (max-width: 601px) {
   .container-login {
     width: 85%;
   }
 }
-@media only screen and (min-width: 993px) {
+@media only screen and (max-width: 993px) {
   .container-login {
-    width: 70%;
-  }
-}
-
-@media only screen and (min-width: 601px) {
-  .container {
-    width: 85%;
-  }
-}
-@media only screen and (min-width: 993px) {
-  .container {
     width: 70%;
   }
 }
