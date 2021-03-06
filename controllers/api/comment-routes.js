@@ -26,6 +26,7 @@ router.post("/", withAuth, async (req, res) => {
         user_id: req.session.user_id,
         post_id: req.body.post_id,
       });
+      res.json(newComment);
     }
   } catch (err) {
     console.log(err);

@@ -6,19 +6,30 @@ const axios = require("axios");
 
 router.get("/", async (req, res) => {
   try {
-    const post = await Post.findAll({
+    const postDefault = await Post.findAll({
       attributes: [
         "id",
         "title",
         "created_at",
         [
-          sequelize.literal(
+          await sequelize.literal(
             "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
           ),
           "vote_count",
         ],
+        // [
+        //   await (Sequelize.literal(
+        //     `MAX(CASE Type WHEN 'vote_count' THEN post_id ELSE 0 END)`
+        //   ),
+        //   "Employee"),
+        // ],
       ],
-      order: [["created_at", "DESC"]],
+
+      order: ["created_at", "DESC"],
+
+      // where: {
+      //   Type: []
+      // }
 
       include: [
         {
@@ -42,11 +53,95 @@ router.get("/", async (req, res) => {
         { model: Image, attributes: ["img_url"] },
       ],
     });
+
+    const voteCount = await Post.findAll({
+      attributes: [
+        "id",
+        "title",
+        "created_at",
+        [
+          await sequelize.literal(
+            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+          ),
+          "vote_count",
+        ],
+      ],
+
+      order: ["vote_count", "DESC"],
+
+      include: [
+        {
+          model: Comment,
+          attributes: [
+            "id",
+            "comment_text",
+            "post_id",
+            "user_id",
+            "created_at",
+          ],
+          include: {
+            model: User,
+            attributes: ["username"],
+          },
+        },
+        {
+          model: User,
+          attributes: ["username"],
+        },
+        { model: Image, attributes: ["img_url"] },
+      ],
+    });
+
+    // const voteCount = await Post.findAll({
+    //   attributes: [
+    //     "id",
+    //     "title",
+    //     "created_at",
+    //     [
+    //       await sequelize.literal(
+    //         "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+    //       ),
+    //       "vote_count",
+    //     ],
+    //   ],
+
+    //   order: ["vote_count", "DESC"],
+
+    //   include: [
+    //     {
+    //       model: Comment,
+    //       attributes: [
+    //         "id",
+    //         "comment_text",
+    //         "post_id",
+    //         "user_id",
+    //         "created_at",
+    //       ],
+    //       include: {
+    //         model: User,
+    //         attributes: ["username"],
+    //       },
+    //     },
+    //     {
+    //       model: User,
+    //       attributes: ["username"],
+    //     },
+    //     { model: Image, attributes: ["img_url"] },
+    //   ],
+    // });
     if (!post) {
       res.status(404).json({ message: "There is no post with this id " });
       return;
     }
-    res.json(post);
+    switch (sortBy) {
+      // first value will be set to null when users didn't select a sort
+      case "default":
+        res.json(postDefault);
+        break;
+      case "vote":
+        res.json(voteCount);
+      // case
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
