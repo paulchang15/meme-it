@@ -6,7 +6,8 @@ const axios = require("axios");
 
 router.get("/", async (req, res) => {
   try {
-    const post = await Post.findAll({
+    const sortBy = req.body.sort;
+    const postDefault = await Post.findAll({
       attributes: [
         "id",
         "title",
@@ -42,9 +43,54 @@ router.get("/", async (req, res) => {
         { model: Image, attributes: ["img_url"] },
       ],
     });
-    if (!post) {
-      res.status(404).json({ message: "There is no post with this id " });
-      return;
+
+    const voteCount = await Post.findAll({
+      attributes: [
+        "id",
+        "title",
+        "created_at",
+        [
+          sequelize.literal(
+            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+          ),
+          "vote_count",
+        ],
+      ],
+      order: [["vote_count", "ASC"]],
+
+      include: [
+        {
+          model: Comment,
+          attributes: [
+            "id",
+            "comment_text",
+            "post_id",
+            "user_id",
+            "created_at",
+          ],
+          include: {
+            model: User,
+            attributes: ["username"],
+          },
+        },
+        {
+          model: User,
+          attributes: ["username"],
+        },
+        { model: Image, attributes: ["img_url"] },
+      ],
+    });
+    // switch to differentiate which option was chosen from front end
+    switch (sortBy) {
+      case "newest":
+        await postDefault;
+        break;
+      case "votes":
+        await voteCount;
+        break;
+      default:
+        postDefault;
+        break;
     }
     res.json(post);
   } catch (err) {
