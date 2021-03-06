@@ -45,6 +45,64 @@ body {
   background-color: #34c2e6;
   text-decoration-color: rgb(219, 86, 86);
 }
+
+.vertical-nav {
+  height: 100%;
+  width: 230px;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.vertical-nav a {
+  padding: 1px 8px 6px 1px;
+  text-decoration: none;
+  font-size: 25px;
+  color: white;
+  display: block;
+}
+
+.vertical-nav a:hover {
+  color: #f1f1f1;
+}
+
+.with-gap {
+  color: white;
+}
+
+.sortby {
+  color: black;
+}
+
+.radio-btn {
+  line-height: 1%;
+}
+
+.main {
+  margin-left: 160px;
+  /* Same as the width of the sidenav */
+  font-size: 28px;
+  /* Increased text to enable scrolling */
+  padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+  .vertical-nav {
+    padding-top: 15px;
+  }
+
+  .vertical-nav a {
+    font-size: 18px;
+  }
+}
+
+.show {
+  display: block;
+}
 /* nav .brand-logo {
   padding: 0 15px;
 } */
