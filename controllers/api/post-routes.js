@@ -117,17 +117,34 @@ router.get("/:id", async (req, res) => {
 router.post("/upvote/", withAuth, async (req, res) => {
   try {
     // Logic to unvote after voted
-    // find upvote logic,  if upvoted, then decrease upvote by 1
 
-    await Post.upvote(
-      {
-        ...req.body,
-        user_id: req.session.user_id,
+    const voted = {
+      ...req.body,
+      user_id: req.session.user_id,
+    };
+    // find a vote by the id value, according to the user_id and post_id
+    const vote = await Vote.findOne({
+      where: {
+        user_id: voted.user_id,
+        post_id: voted.post_id,
       },
-      { Vote, Comment, User, Image }
-    );
+      attributes: ["id"],
+    });
 
-    res.send("upvoted");
+    // check vote value,  if upvoted, then delete vote data
+    if (vote !== null) {
+      await Vote.destroy({
+        where: {
+          id: vote.id,
+        },
+      });
+      // sends vote deleted as response which triggers page refresh, updating vote count
+      res.send("vote deleted");
+    } else {
+      Post.upvote(voted, { Vote, Comment, User, Image });
+      // sends voted as response which triggers page refresh, updating vote count
+      res.send("voted");
+    }
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

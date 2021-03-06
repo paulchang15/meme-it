@@ -2,9 +2,7 @@ async function upvoteClickHandler(event) {
   event.preventDefault();
   console.log("clicked!!!!!!!!!");
   const id = event.target.getAttribute("data-post");
-  // let postId = document.getElementById("user").getAttribute("href");
-  // await postId.split("/post/");
-  console.log(event.target.getAttribute("data-post"));
+  console.log(id);
   const response = await fetch("/api/posts/upvote", {
     method: "POST",
     body: JSON.stringify({
@@ -15,7 +13,7 @@ async function upvoteClickHandler(event) {
       "Content-Type": "application/json",
     },
   });
-  console.log({ x: response.ok });
+  // console.log({ x: response.ok });
   if (response.ok) {
     document.location.reload();
   } else {
