@@ -6,7 +6,8 @@ const axios = require("axios");
 
 router.get("/", async (req, res) => {
   try {
-    const sortBy = req.body.sort;
+    const sortBy = req.params.sort;
+    console.log("==========================sorted by:", sortBy);
     const postDefault = await Post.findAll({
       attributes: [
         "id",
@@ -96,13 +97,13 @@ router.get("/", async (req, res) => {
     // switch to differentiate which option was chosen from front end
     switch (sortBy) {
       case "newest":
-        await postDefault;
+        await res.json(postDefault);
         break;
       case "votes":
-        await voteCount;
+        await res.json(voteCount);
         break;
       default:
-        postDefault;
+        await res.json(postDefault);
         break;
     }
   } catch (err) {

@@ -13,17 +13,17 @@
 
     <div class="vertical-nav">
         <br>
-        <h5 class="sortby">Sort By:</h5>
+        <h5>Sort By:</h5>
         <form class="radio-btn" action="#">
             <p>
-                <label>
-                    <input class="with-gap" name="group3" id="newest-post" type="radio" checked />
+                <label for="newest-post">
+                    <input class="with-gap" checked id="newest-post" data-sort="newest" type="radio" />
                     <span>Newest to Oldest</span>
                 </label>
             </p>
             <p>
-                <label>
-                    <input class="with-gap" name="group3" id="vote-count" type="radio" />
+                <label for="vote-count">
+                    <input class="with-gap" id="vote-count" data-sort="votes" type="radio" />
                     <span>Most Popular</span>
                 </label>
             </p>
