@@ -13,13 +13,24 @@ router.get("/", async (req, res) => {
         "title",
         "created_at",
         [
-          sequelize.literal(
+          await sequelize.literal(
             "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
           ),
           "vote_count",
         ],
+        // [
+        //   await (Sequelize.literal(
+        //     `MAX(CASE Type WHEN 'vote_count' THEN post_id ELSE 0 END)`
+        //   ),
+        //   "Employee"),
+        // ],
       ],
-      order: [["created_at", "DESC"]],
+
+      order: ["created_at", "DESC"],
+
+      // where: {
+      //   Type: []
+      // }
 
       include: [
         {
@@ -50,13 +61,14 @@ router.get("/", async (req, res) => {
         "title",
         "created_at",
         [
-          sequelize.literal(
+          await sequelize.literal(
             "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
           ),
           "vote_count",
         ],
       ],
-      order: [["vote_count", "ASC"]],
+
+      order: ["vote_count", "DESC"],
 
       include: [
         {
@@ -80,6 +92,7 @@ router.get("/", async (req, res) => {
         { model: Image, attributes: ["img_url"] },
       ],
     });
+
     // switch to differentiate which option was chosen from front end
     switch (sortBy) {
       case "newest":
@@ -92,7 +105,6 @@ router.get("/", async (req, res) => {
         postDefault;
         break;
     }
-    res.json(post);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
@@ -145,20 +157,6 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
-// router.post("/", async (req, res) => {
-//   try {
-//     const postCreate = await Post.create({
-//       title: req.body.title,
-//       content: req.body.content,
-//       user_id: req.session.user_id, // add back req.session.user_id when login works
-//     });
-//     res.json(postCreate);
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json(err);
-//   }
-// });
 
 router.post("/upvote/", withAuth, async (req, res) => {
   try {

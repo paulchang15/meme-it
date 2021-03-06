@@ -45,16 +45,9 @@ router.get("/", withAuth, async (req, res) => {
         { model: Image, attributes: ["img_url"] },
       ],
     });
-    // console.log("--------------------------------------");
-    // console.log(allPosts);
     const posts = await allPosts.map((post) => post.get({ plain: true }));
-
-    // if (!allPosts) {
-    //   res.status(404).json({ message: "No posts found!" });
-    //   return;
-    // }
-    console.log("-----------------dashboard posts---------------------");
-    console.log(posts);
+    // console.log("-----------------dashboard posts---------------------");
+    // console.log(posts);
     await res.render("dashboard", { posts, loggedIn: true });
   } catch (err) {
     console.log(err);

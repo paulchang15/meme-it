@@ -24,6 +24,10 @@
       var elems = document.querySelectorAll('.sidenav');
       var instances = M.Sidenav.init(elems);
     });
+    document.addEventListener('DOMContentLoaded', function () {
+      var elems = document.querySelectorAll('.tooltipped');
+      var instances = M.Tooltip.init(elems);
+    });
   </script>
 </head>
 
@@ -34,11 +38,11 @@
         <a href="/" class="brand-logo">iMemeit</a>
         <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
-          <!-- Button to open the modal login form -->
 
           {{#if loggedIn }}
           <li><a href="/dashboard">Dashboard</a></li>
-          <li><a id="logout" href="/"><i class="material-icons">exit_to_app</i></a></li>
+          <li><a id="logout" href="/"><i class="material-icons tooltipped" data-position="bottom"
+                data-tooltip="Logout">exit_to_app</i></a></li>
           {{else}}
           <li><a href="/login">Login</a></li>
           {{/if}}
@@ -50,7 +54,8 @@
   <ul class="sidenav" id="mobile-demo">
     {{#if loggedIn }}
     <li><a href="/dashboard"><i class="material-icons">dashboard</i>Dashboard</a></li>
-    <li><a id="logout" href="/"><i class="material-icons">exit_to_app</i>Logout</a></li>
+    <li><a id="logout" href="/"><i class="material-icons tooltipped" data-position="bottom"
+          data-tooltip="Logout">exit_to_app</i>Logout</a></li>
     {{else}}
     <li><a href="/login">Login</a></li>
     {{/if}}
