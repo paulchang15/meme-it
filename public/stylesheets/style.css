@@ -160,6 +160,7 @@ body {
 .comment_section {
   padding: 50px;
 }
+
 @-webkit-keyframes animatezoom {
   from {
     -webkit-transform: scale(0);

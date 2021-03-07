@@ -1,36 +1,56 @@
-<html>
+<div class="vertical-nav">
+    <br>
+    <h5>Sort By:</h5>
+    {{!-- <form class="radio-btn">
+        <p>
+            <label>
+                <input name="group1" class="with-gap" id="newest-post" data-sort="newest" type="radio" />
+                <span>Newest to Oldest</span>
+            </label>
+        </p>
+        <p>
+            <label>
+                <input name="group1" class="with-gap" id="vote-count" data-sort="votes" type="radio" />
+                <span>Most Popular</span>
+            </label>
+        </p>
 
-<head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <style>
-        body {
-            font-family: "Lato", sans-serif;
-        }
-    </style>
-</head>
+    </form> --}}
+    {{!--
+    <form id="sort-option" action="#">
+        <p>
+            <label>
+                <input name="group1" class="with-gap" type="radio" value="false" />
+                <span>Newest to Oldest</span>
+            </label>
+        </p>
+        <p>
+            <label>
+                <input name="group1" class="with-gap" type="radio" value="false" />
+                <span>Most Popular</span>
+            </label>
+        </p>
 
-<body>
+    </form> --}}
 
-    <div class="vertical-nav">
-        <br>
-        <h5>Sort By:</h5>
-        <form class="radio-btn" action="#">
-            <p>
-                <label for="newest-post">
-                    <input class="with-gap" checked id="newest-post" data-sort="newest" type="radio" />
-                    <span>Newest to Oldest</span>
-                </label>
-            </p>
-            <p>
-                <label for="vote-count">
-                    <input class="with-gap" id="vote-count" data-sort="votes" type="radio" />
-                    <span>Most Popular</span>
-                </label>
-            </p>
+    {{!--
+    <!-- Dropdown Trigger -->
+    <a class='dropdown-trigger btn' data-target='dropdown1'>Drop Me!</a>
 
-        </form>
+    <!-- Dropdown Structure -->
+    <ul id='dropdown1' class='dropdown-content'>
+        <li><a href="#!">Newest to Oldest</a></li>
+        <li><a href="#!">Most Popular</a></li>
+
+    </ul> --}}
+
+    <div class="input-field col s12">
+        <select id="sort">
+            <option value="" disabled selected>Sort By</option>
+            <option value="newest">Newest to Oldest</option>
+            <option value="votes">Most Popular</option>
+
+        </select>
+        <label>Materialize Select</label>
     </div>
-
-</body>
-
-</html>
+</div>
