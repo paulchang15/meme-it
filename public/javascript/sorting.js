@@ -7,16 +7,19 @@ document.addEventListener("DOMContentLoaded", function () {
     event.preventDefault();
     console.log(selectEl);
 
-    const sort = await fetch("/api/posts/", {
+    const sort = await fetch(`/api/posts/?sort=${selectEl.value}`, {
       method: "GET",
-      params: JSON.stringify({
-        // pass in data from string to either be "default" or "vote"
-        sort: selectEl,
-      }),
       headers: {
         "Content-Type": "application/json",
       },
     });
+
+    if (sort.ok) {
+      document.location.replace("/dashboard");
+      // document.location.reload();
+    } else {
+      alert(sort.statusText);
+    }
   }
 
   selectEl.addEventListener("change", postSortHandler);

@@ -6,7 +6,7 @@ const axios = require("axios");
 
 router.get("/", async (req, res) => {
   try {
-    const sortBy = req.params.sort;
+    const sortBy = JSON.stringify(req.query.sort);
     console.log("==========================sorted by:", sortBy);
     const postDefault = await Post.findAll({
       attributes: [
@@ -27,7 +27,7 @@ router.get("/", async (req, res) => {
         // ],
       ],
 
-      order: ["created_at", "DESC"],
+      order: [["created_at", "DESC"]],
 
       // where: {
       //   Type: []
@@ -69,7 +69,7 @@ router.get("/", async (req, res) => {
         ],
       ],
 
-      order: ["vote_count", "DESC"],
+      order: [["vote_count", "DESC"]],
 
       include: [
         {
@@ -98,9 +98,11 @@ router.get("/", async (req, res) => {
     switch (sortBy) {
       case "newest":
         await res.json(postDefault);
+        console.log("==========================default work!!!!===========");
         break;
       case "votes":
         await res.json(voteCount);
+        console.log("==========================vote work!!!!===========");
         break;
       default:
         await res.json(postDefault);
