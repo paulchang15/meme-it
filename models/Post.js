@@ -61,6 +61,7 @@ Post.init(
         key: "id",
       },
     },
+    
     // votes: {
     //   type: DataTypes.INTEGER,
     //   allowNull: false,

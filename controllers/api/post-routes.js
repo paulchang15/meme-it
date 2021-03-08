@@ -6,7 +6,7 @@ const axios = require("axios");
 
 router.get("/", async (req, res) => {
   try {
-    const sortBy = JSON.stringify(req.query.sort);
+    const sortBy = req.query.sort;
     console.log("==========================sorted by:", sortBy);
     const postDefault = await Post.findAll({
       attributes: [
@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
         "created_at",
         [
           await sequelize.literal(
-            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+            "(SELECT COUNT(*) AS vote_count FROM vote WHERE post.id = vote.post_id)"
           ),
           "vote_count",
         ],
@@ -56,58 +56,61 @@ router.get("/", async (req, res) => {
       ],
     });
 
-    const voteCount = await Post.findAll({
-      attributes: [
-        "id",
-        "title",
-        "created_at",
-        [
-          await sequelize.literal(
-            "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
-          ),
-          "vote_count",
-        ],
-      ],
+    // const voteCount = await Post.findAll({
+    //   attributes: [
+    //     "id",
+    //     "title",
+    //     "created_at",
+    //     [
+    //       sequelize.literal(
+    //         "(SELECT COUNT(*) FROM vote WHERE post.id = vote.post_id)"
+    //       ),
+    //       "vote_count",
+    //     ],
+    //   ],
 
-      order: [["vote_count", "DESC"]],
+    //   order: [[sequelize.literal("vote_count"), "DESC"]],
 
-      include: [
-        {
-          model: Comment,
-          attributes: [
-            "id",
-            "comment_text",
-            "post_id",
-            "user_id",
-            "created_at",
-          ],
-          include: {
-            model: User,
-            attributes: ["username"],
-          },
-        },
-        {
-          model: User,
-          attributes: ["username"],
-        },
-        { model: Image, attributes: ["img_url"] },
-      ],
-    });
+    //   include: [
+    //     {
+    //       model: Comment,
+    //       attributes: [
+    //         "id",
+    //         "comment_text",
+    //         "post_id",
+    //         "user_id",
+    //         "created_at",
+    //       ],
+    //       include: {
+    //         model: User,
+    //         attributes: ["username"],
+    //       },
+    //     },
+    //     {
+    //       model: User,
+    //       attributes: ["username"],
+    //     },
+    //     { model: Image, attributes: ["img_url"] },
+    //   ],
+    // });
 
     // switch to differentiate which option was chosen from front end
-    switch (sortBy) {
-      case "newest":
-        await res.json(postDefault);
-        console.log("==========================default work!!!!===========");
-        break;
-      case "votes":
-        await res.json(voteCount);
-        console.log("==========================vote work!!!!===========");
-        break;
-      default:
-        await res.json(postDefault);
-        break;
-    }
+    // switch (sortBy) {
+    //   case "newest":
+    //     await res.json(postDefault);
+    //     console.log(
+    //       "==========================PostDefault firing off!!!!==========="
+    //     );
+    //     break;
+    //   case "votes":
+    //     await res.json(voteCount);
+    //     console.log("==========================vote work!!!!===========");
+    //     break;
+    //   // default:
+    //   //   await res.json(postDefault);
+    //   //   break;
+    // }
+    await res.json(postDefault);
   } catch (err) {
     console.log(err);
     res.status(500).json(err);

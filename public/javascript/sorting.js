@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const selectEl = document.querySelector("#sort");
 
   async function postSortHandler(event) {
-    event.preventDefault();
+    // event.preventDefault();
     console.log(selectEl);
 
     const sort = await fetch(`/api/posts/?sort=${selectEl.value}`, {
@@ -15,8 +15,9 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (sort.ok) {
-      document.location.replace("/dashboard");
-      // document.location.reload();
+      console.log("=========SORT WORKED===========");
+      // document.location.replace("/");
+      document.location.reload();
     } else {
       alert(sort.statusText);
     }
